@@ -1,0 +1,1259 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amssymb,upgreek}
+
+\usepackage{url}
+\usepackage{bm}
+\usepackage[left=1in,top=1in,right=1in,bottom=1in,head=.2in]{geometry}
+
+\usepackage{enumitem}
+\setlength{\marginparwidth}{0.8in}%for todonotes
+\usepackage[textsize=scriptsize]{todonotes}
+\usepackage{color}
+\usepackage{mathtools} % for overbraces
+
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[CO]{\small\textsc{Higher Order Cork Theorems}}
+\fancyhead[CE]{\small\textsc{Melvin and Schwartz}}
+\cfoot{\ \vskip.01in $_{\thepage}$}
+
+\usepackage[cmtip,all]{xy}
+
+
+
+
+
+% theorems, lemmas, remarks, etc.
+\swapnumbers
+%\theoremstyle{plain} % just in case the style had changed
+%\newtheorem{thm}{Theorem} % lettered theorems (A,B,C,D)
+%\renewcommand{\thethm}{\Alph{thm}}
+\newtheorem{theorem}{Theorem}[section] % numbered theorems, lemmas, etc
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{rfcthm}{Relative Finite Cork Theorem}
+\newtheorem*{fcthm*}{Finite Cork Theorem}
+\newtheorem*{ccthm*}{Cork Consolidation Theorem}
+\newtheorem*{csthm*}{Cork Separation Theorem}
+\newtheorem*{icthm*}{Infinite Cork Theorem}
+\newtheorem*{icthms*}{Infinite Cork Theorems}
+\newtheorem*{aclemma*}{\ac-Lemma}
+\newtheorem*{mclemma*}{Multicork Lemma}
+\newtheorem*{multicorktheorem*}{Multicork Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{corollary*}{Corollary}
+\newcommand{\thistheoremname}{}
+\newtheorem{genericthm}[theorem]{\thistheoremname}
+\newenvironment{namedtheorem}[1]
+  {\renewcommand{\thistheoremname}{#1}%
+   \begin{genericthm}}
+  {\end{genericthm}}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{remarks}[theorem]{Remarks}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{examples}[theorem]{Examples}
+\newtheorem*{remark*}{Remark}
+\newtheorem*{definition*}{Definition}
+\newtheorem*{remarks*}{Remarks}
+\newtheorem*{addenda*}{Addenda}
+
+
+\newcommand{\pf}{\vskip-5pt \vskip-5pt \proof}
+
+\newcommand{\fig}[3]{\begin{figure}[h!] \includegraphics[height=#1pt]{#2}#3\end{figure}}
+\newcommand{\defref}[1]{Definition~\ref{#1}}
+\newcommand{\figref}[1]{Figure~\ref{#1}}
+\newcommand{\secref}[1]{Section~\ref{#1}}
+\newcommand{\thmref}[1]{Theorem~\ref{#1}}
+\newcommand{\lemref}[1]{Lemma~\ref{#1}}
+\newcommand{\propref}[1]{Proposition~\ref{#1}}
+\newcommand{\remref}[1]{Remark~\ref{#1}}
+\newcommand{\aref}[1]{Assertion~\ref{#1}}
+\newcommand{\clref}[1]{Claim~\ref{#1}}
+\newcommand{\coref}[1]{Corollary~\ref{#1}}
+\newcommand{\exref}[1]{Example~\ref{#1}}
+
+\newcommand{\head}[1]{\bigskip\noindent{\bf #1}}
+
+
+\newcommand{\bit}[1]{\textbf{\textit{#1}}} % {\textit{#1}} %
+
+%%%%%%%%%  math blackboard bold  %%%%%%%%%%
+
+\newcommand{\ba}{\mathbb A}
+\newcommand{\bb}{\mathbb B}
+\newcommand{\bc}{\mathbb C}
+\newcommand{\bh}{\mathbb H}
+\newcommand{\bj}{\mathbb J}
+\newcommand{\bl}{\mathbb L}
+\newcommand{\bn}{\mathbb N}
+\newcommand{\bq}{\mathbb Q}
+\newcommand{\br}{\mathbb R}
+\newcommand{\bz}{\mathbb Z}
+\newcommand{\bx}{\mathbb X}
+\newcommand{\bp}{\mathbb P}
+\newcommand{\bw}{\mathbb W}
+
+%%%%%%%%%  math cal  %%%%%%%%%%
+
+\newcommand{\cala}{\mathcal A}
+\newcommand{\calb}{\mathcal B}
+\newcommand{\calc}{\mathcal C}
+\newcommand{\cald}{\mathcal D}
+\newcommand{\cale}{\mathcal E}
+\newcommand{\calj}{\mathcal J}
+\newcommand{\call}{\mathcal L}
+\newcommand{\calm}{\mathcal M}
+\newcommand{\cals}{\mathcal S}
+\newcommand{\calsbar}{\overline{\cals}}
+
+%%%%%%%%%  math symbols  %%%%%%%%%
+
+\newcommand{\medcup}{\mbox{\larger$\cup$}}
+% {\mathrel{\scalebox{1.15}{\ensuremath{\cup}}}}%
+\newcommand{\st}{\,\vert\,}
+\newcommand{\id}{\textup{id}}
+\newcommand{\pt}{\textup{pt}}
+\newcommand{\from}{\leftarrow}
+\newcommand{\lfrom}{\ \longleftarrow \ }
+\newcommand{\lto}{\ \longrightarrow \ }
+\newcommand{\hto}{\hookrightarrow}
+\newcommand{\sto}{\!\!\xymatrix@C=1em{{}\ar@{~>}[r]&{}}\!\!}
+\newcommand{\lhto}{\ \lhook\joinrel\relbar\joinrel\rightarrow \ }
+\newcommand{\image}{\textup{im}}
+\newcommand{\del}{\partial}
+\newcommand{\dt}{{\hskip-.2pt\raisebox{.2ex}{\text{\tiny\textbullet}}\,}}
+
+%%%%%%%%%  special commands  %%%%%%%%
+
+\newcommand{\sss}{S^2\!\!\times\!S^2}
+\newcommand{\sts}{S^2\!\!\widetilde\times\!S^2}
+\newcommand{\cpone}{\bc P^1}
+\newcommand{\cponebar}{\smash{\overline{\bc P}^1}}
+\newcommand{\cptwo}{\bc P^2}
+\newcommand{\cptwobar}{\smash{\overline{\bc P}^2}}
+\newcommand{\interior}{\textup{int}}
+\newcommand{\ac}{\textup{AC}}
+\newcommand{\sac}{\textup{SAC}}
+\newcommand{\lk}{\textup{lk}}
+\newcommand{\overbar}[1]{\mkern 1mu\overline{\mkern-2.5mu#1\mkern-1mu}\mkern 1mu}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=.2pt] (char) {#1};}}
+\newcommand{\starcirc}{\circled{$*$}}
+\newcommand{\cs}{\mathop\#}
+\newcommand{\bcs}{\mathop\natural}
+\newcommand{\bsum}{C_1\bcs \cdots \bcs C_{n}}
+\newcommand{\csum}{\del C_1 \cs \cdots \cs \del C_{n}}
+\newcommand{\dsum}{B^4\sqcup C_1\sqcup\cdots\sqcup C_{n}}
+
+\newcommand{\pw}{\textup{PW}}
+
+\DeclareMathOperator{\diff}{Diff}
+
+
+
+% footnotes %
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\newcommand{\foot}[1]{\setcounter{footnote}{1}\footnote{\ #1}}
+
+% lists %
+
+\newcommand{\items}{\begin{itemize}[leftmargin=25pt,rightmargin=5pt]
+  \setlength\itemsep{2pt}}
+\newcommand{\stopitems}{\end{itemize}}
+
+
+\renewcommand{\baselinestretch}{1.05}
+
+
+
+\begin{document}
+
+\title{Higher Order Corks}
+\author{Paul Melvin and Hannah Schwartz}
+
+\begin{abstract}
+It is shown that any finite collection of smooth, closed, simply-connected $4$-manifolds homeomorphic to a given one $X$ can be obtained by removing a single compact contractible submanifold from $X$, and then regluing it by powers of a boundary diffeomorphism.  Furthermore, by allowing the contractible submanifold to be noncompact, the collection of {\it all} smooth manifolds  homeomorphic to $X$ can be obtained in this way.
+%It is shown that any finite collection of smooth, closed, simply-connected $4$-manifolds that are homeomorphic to a given one $X$ can be obtained by removing a single compact contractible submanifold from $X$, and then regluing it by powers of a periodic diffeomorphism of the boundary.  Furthermore, the collection of {\it all} smooth manifolds  homeomorphic to $X$  can be obtained from $X$ either by replacing a single open contractible submanifold of $X$ by suitable contractible manifolds with the same ends, or by removing and regluing by suitable boundary diffeomorphisms a single  bounded submanifold with contractible components.
+\end{abstract}
+
+\maketitle
+
+\vskip-.4in
+\vskip-.4in
+
+\parskip 2pt
+
+\setcounter{section}{-1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}  %% REVISED ON MAR 27
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A \bit{cork} is a compact contractible 4-manifold $C$ equipped with a diffeomorphism $h\colon\del C\to\del C$.\foot{We implicitly work throughout in the smooth oriented category, so it is assumed that $C$ is smooth and $h$ is orientation preserving.}  (Even without $h$, such a $4$-manifold $C$ may be referred to as a cork.)  The cork $(C,h)$ is \bit{trivial} if $h$ extends to a diffeomorphism of $C$, and is \bit{finite} of order $n$, or \bit{infinite}, according to whether $h$ is periodic of order $n$, or of infinite order.  Corks of order $2$ will be called \bit{involutory}.  
+
+If $C$ is embedded in a 4-manifold $X$, then the associated \bit{cork twist}
+$$
+X_{C,h} \ = \ (X-\interior(C))\,\cup_h \,C
+$$
+is homeomorphic to $X$, by Freedman\,\cite{freedman:simply-connected}, but not necessarily diffeomorphic to $X$, by Akbulut~\cite{akbulut:contractible}.  Thus cork twisting may alter smooth structures on 4-manifolds.  It is now known by the Involutory Cork Theorem (\cite{curtis-freedman-hsiang-stong,matveyev}, see also \cite{kirby:cork}) that {\sl any} pair of compact simply-connected 4-manifolds that are h-cobordant rel boundary (and thus homeomorphic) are related by a single involutory cork twist, and that for closed manifolds, the cork may be chosen with simply-connected complement.  We extend this result here to arbitrary finite families of {\sl closed} $4$-manifolds; see \thmref{rfct} for the {\sl bounded} case. 
+
+\begin{fcthm*}\label{fcthm}
+Given any finite list $X_i$ \,$(i\in\bz_n)$  of simply-connected closed $4$-manifolds homeomorphic to a given one $X = X_0$, there is a cork $(C,h)$ of order $n$ embedded in $X$ with simply-connected complement whose cork twists $X_{C,h^i}$ are diffeomorphic to $X_i$ for each $i$.
+\end{fcthm*}
+
+To address infinite lists $X_i$ $(i\in\bz)$ of 4-manifolds homeomorphic to $X$, such as an enumeration of {\sl all} the exotic smooth structures on $X$, it is tempting to search for a single infinite cork $(C,h)$ embedded in $X$ such that $X_{C,h^i} \cong X_i$ for all $i$ (here and below, $\cong$ denotes diffeomorphism).  However such a cork need not exist, as noted by Tange \cite{tange}. For example, it follows from the adjunction inequality that knot surgeries on the Kummer surface using any list of knots with unbounded Alexander polynomial degrees cannot result from twisting a single infinite cork (cf.\ Yasui \cite{yasui}).  Thus the Finite Cork Theorem has no direct infinite analogue.  It can be generalized, however, by relaxing the compactness condition on the cork:  Define a \bit{noncompact cork} to be a pair $(C,h)$, where $C$ is a noncompact contractible 4-manifold with nonempty boundary and $h\colon \del C\to\del C$ is a diffeomorphism, and define its cork twists as above.  Then we prove:
+
+\begin{icthm*}\label{icthm}
+Given an infinite list $X_i$ \,$(i\in\bz)$ of closed simply-connected $4$-manifolds homeomorphic to a given one $X=X_0$, there is a noncompact cork $(C,h)$ embedded in $X$ 
+% with simply-connected complement? 
+whose cork twists $X_{C,h^i}$ are diffeomorphic to $X_i$ for each $i$.
+\end{icthm*}
+
+\head{Acknowledgements.}  This work was initiated while both authors were visitors at IAS in Princeton.  We thank the Institute for its hospitality.  We are also indebted to Dave Auckly for enlightening conversations leading to the relative versions of our cork theorems, and to Danny Ruberman, Adam Levine and Bob Gompf for asking timely questions that inspired our infinite cork theorems.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Preliminaries}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\vskip-6pt
+\vskip-6pt
+\head{Multicorks and Pinwheels}
+
+%Two corks $(C,h)$ and $(C,g)$ will be considered {\it equivalent} if there are diffeomorphisms $f_i\colon C \to C$ such that $f_i \circ h^i=g^i$ for all $i$. Then, given any 4-manifold $X$ and any embedding $C \subset X$, the manifolds $X_{C,h^i}$ and $X_{C,g^i}$ are diffeomorphic. 
+
+For the present purposes, it is useful to broaden the notion of corks and their cork twists to ``multicorks" and their ``cork replacements".  
+
+%\begin{definition}\label{precork}
+%A \bit{precork} is a compact contractible $4$-manifold.  
+%\end{definition}
+
+\begin{definition}\label{multicork}
+A \bit{multicork} is a list $\calc = (C_1,C_2,\dots)$ of compact contractible $4$-manifolds equipped with boundary diffeomorphisms $h_{ij}\colon\del C_j\to \del C_i$ for all $i,j$ such that $h_{ij}h_{jk} = h_{ik}$. 
+% called the \bit{boundary identifications}
+The $C_i$ are called the \bit{components} of $\calc$.  Their boundaries are pairwise diffeomorphic, by definition, but the components themselves need not be diffeomorphic; see \cite{akbulut-ruberman:absolute} for examples.  
+% Note that the boundary identifications $h_{ij}$ are determined by the \bit{markings} $h_i = h_{i0}\colon\del C_0\to \del C_i$ for $i>0$. 
+The \bit{order} of the multicork $\calc$ is the number of components that it has, which may be finite or infinite.  Two multicorks $(C_1,C_2,\dots)$ and $(C_1',C_2',\dots)$ of the same order
+% with markings $h_i$ and $h_i'$
+are considered equivalent if there are diffeomorphisms $g_i\colon C_i\to C_i'$ such that $g_ih_{ij} = h_{ij}'g_j$ for all $i,j$.
+\end{definition}
+
+Multicorks generalize corks.  Indeed, there is a natural order-preserving injection 
+$$
+\mu\colon\text{Corks} \lhto \text{Multicorks}
+$$
+sending any cork $(C,h)$ to the constant multicork $\mu(C,h) = (C,C,\dots)$ of the same order
+% with markings $h_i = h^{-i}$.  
+with boundary identifications $h_{ij} = h^{i-j}$.  Note that $\mu$ is not surjective, even up to equivalence.  Indeed, multicorks whose components are not all diffeomorphic are never in the image of $\mu$, nor for example is the multicork $(C,C,C)$ with $h_{12}=\id$ and $h_{21013}=h$, where $(C,h)$ is any nontrivial cork. 
+
+%Often, the boundaries of the $C_i$'s will be literally equal, in which case the boundary identifications need not be specified.  If the $C_i$'s themselves are all equal, but with boundary identifications that may vary, then we say that the multicork is {\it constant}.  Thus   Note that $\mu$ is {\it not} surjective (indeed its image contains only constant multicorks, and not even all of those, e.g.\ ), and so multicorks generalize corks.  
+
+
+\begin{definition}\label{corkreplacements}
+Any embedding of a component $C_i$ of a multicork $(C_1,C_2,\dots)$ in the interior of a 4-manifold $X$ generates a list of \bit{cork replacements} 
+$$
+X_{C_i,C_j} \ = \ (X-\interior(C_i))\cup_{h_{ij}} C_j.
+$$
+These replacements are determined up to diffeomorphism by the equivalence class of the multicork.  They depend of course on the embedding $C_i\subset X$ and on the boundary identifications $h_{ij}$, but this dependence is suppressed in the notation since it can often be gleaned from the context.  
+
+Note that the boundary of each cork replacement is naturally identified with $\del X$, and will be viewed as being literally equal to it.  If these identifications extend to diffeomorphisms $X_{C_i,C_j}\to X$ (that is, if all the $X_{C_i,C_j}$ are diffeomorphic to $X$ rel boundary), then the embedding $C_i\subset X$ is said to be \bit{trivial}.  In this case each of the other components $C_j$ also embeds trivially in $X$, by composing the natural inclusion $C_j\subset X_{C_i,C_j}$ with {\sl any} diffeomorphism $X_{C_i,C_j}\to X$ rel boundary, so we simply say that \bit{the multicork embeds trivially} in $X$.   Similarly, define a trivial embedding of a cork $(C,h)$ in $X$ to be a trivial embedding of its associated multicork $\mu(C,h)$, or equivalently an embedding $C\subset X$ with $X_{C,h^i} \cong X$ rel boundary for all $i$.  Note that $(C,h)$ is trivial (meaning $h$ extends to a diffeomorphism of $C$) if and only if all its embeddings are trivial; see \cite[\S1]{akmr:equivariant}.
+\end{definition}  
+
+
+Cork replacements generalize cork twists.  Indeed, the cork twists $X_{C,h^i}$ of a cork $(C,h)$ associated with an embedding $C\subset X$ are the cork replacements $X_{C_1,C_{i+1}}$ of the multicork $ \mu(C,h)$ associated with the same embedding.  Conversely, when the cork replacements for an embedded multicork are diffeomorphic (rel boundary) to the cork twists of some embedded cork of the same order, we say that the embeddings of the multicork and the cork are \bit{correlated}. All of the correlated embeddings we will discuss arise from the following construction.
+
+\def\rot{h}
+
+\begin{definition}\label{def:pinwheel}
+The \bit{pinwheel} of a finite multicork $\calc = (C_1,\dots,C_{n})$ is the finite cork 
+$$
+\pw(\calc) \ := \  (C_1\bcs\cdots\bcs C_{n}, \rot)
+$$
+where $\bcs$ is boundary connected sum and $\rot$ is the ``obvious" boundary rotation shifting $\del C_i$ to $\del C_{i+1}$, with subscripts taken mod $n$.  More precisely, fix a linear rotation $\rot$ of the 3-sphere of order $n$ and a principal orbit $x_1,\dots,x_{n}$ of the action of the cyclic group generated by $\rot$, with $\rot^{i}(x_j)=x_{i+j}$. Let $y_1\in\del C_1$, and set $y_i = h_{i1}(y_1)\in \del C_i$, where $h_{ij}\colon\del C_j\to \del C_i$ are the boundary identifications of $\calc$.  Now build $\bsum$ from the disjoint union $\dsum$ by adding 1-handles joining $x_i\in S^3$ to $y_i\in \del C_i$ for each $i$.  Then $\rot$ extends to a rotation of 
+$$
+\del(\bsum) \ = \ \csum \ \cong \ \del C_j\cs\cdots\cs\del C_j \qquad\textup{(for any $j$)}
+$$
+sending $\del C_i$ to $\del C_{i+1}$ via $h_{(i+1)i}$, as shown in \figref{pinwheels}a for the case $n=4$.  \end{definition}
+
+\vskip -10pt
+
+%%%%%%%%%% FIG 1 %%%%%%%%%%
+\fig{145}{FigPinwheel}{
+\put(-310,68){$B^4$}
+\put(-330,22){$C_4$}
+\put(-243,57){$C_1$}
+\put(-294,107){$C_2$}
+\put(-375,85){$C_3$}
+\put(-238,15){$\rot$}
+\put(-147,100){$B_3$}
+\put(-88,120){$B_2$}
+\put(-10,65){$B_1$}
+\put(-380,-15){a) Pinwheel of an order $4$ multicork}
+\put(-150,-15){b) Embedding the pinwheel}
+\caption{Pinwheels}
+\label{pinwheels}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+For any embedding of a suitable multicork $\calc$, the ``Pinwheel Lemma" below produces a correlated embedding of its pinwheel $\pw(\calc)$.  This is a critical step in our proof of the Finite Cork Theorem.  The proof of the pinwheel lemma generalizes an argument of Mayveyev \cite{matveyev} (see also Kirby \cite{kirby:cork}) that produces involutory cork embeddings correlated with embeddings of order 2 multicorks; a similar generalization was used in the construction of equivariant corks in \cite{akmr:equivariant}.  To control the fundamental group of the complement of the embedding of the pinwheel, as in the versions of the Involutory Cork Theorem in \cite{curtis-freedman-hsiang-stong} and \cite{kirby:cork}, it is convenient to  start with ``good" or ``very good" embeddings of the multicork (defined in \ref{def:good} below) and to restrict to ``simple" multicorks (defined in \ref{def:simple}).    
+
+\begin{definition} \label{def:good}  Let $X$ be a compact connected 4-manifold with connected boundary, and $C$ be a compact contractible $4$-manifold (i.e.\ a cork without any particular boundary diffeomorphism).   An embedding $C\subset X$ is \bit{good} if $C\subset\interior(X)$, and either $\del X = \varnothing$ with $\pi_1(X-C)=1$, or $\del X\ne\varnothing$ with $\pi_1(X-C)$ normally generated by $\pi_1(\del X)$.  Geometrically, this means that every loop $\sigma$ in $X-C$ is cobordant by an immersed genus zero surface in $X-C$ to a collection of loops in $\del X$.  Such a surface (an immersed disk when $X$ is closed) is called a \bit{good surface} for $\sigma$ in $X-C$.  
+
+A good embedding $C\subset X$ is \bit{very good} if $X-C$ can be built as a handlebody with only 1 and 2-handles, starting with a single 0-handle in the closed case or a boundary collar in the bounded case. Furthermore, a subset of the 2-handles must \bit{homotopically cancel} the 1-handles, meaning that the attaching circles of these 2-handles represent the generators of the fundamental group of the 1-skeleton given by the 1-handles. Note that after further handleslides, it can be arranged for the attaching circle of any additional 2-handle to represent the trivial word in the 1-handle generators.   
+\end{definition}
+
+  
+
+\begin{definition}\label{def:simple}
+A multicork is \bit{simple} if it has a very good trivial embedding in the $4$-sphere, or equivalently (by Palais' disk theorem \cite{palais}) a very good trivial embedding in the $4$-ball.  A cork $(C,h)$ is simple if its associated multicork $\mu(C,h)$ is simple, or equivalently, if there is a very good embedding $C\subset B^4$ such that $B^4_{C,h^j} \cong B^4$ for all $j$.
+\end{definition} 
+
+%The cork replacements for an embedded {\sl finite simple} multicork are just the cork twists of a suitable embedding of the pinwheel of the multicork. 
+
+\begin{namedtheorem}{Pinwheel Lemma}\label{pinwheel}
+Let $(C_1,\dots, C_{n})$ be a finite simple multicork with pinwheel $(P,h)$.  For any embedding of $C_n$ in a $4$-manifold $X$, there is a correlated embedding of the pinwheel $P$ in $X$.  Furthermore, if $C_n\subset X$ is (very) good then $P\subset X$ can be chosen to be (very) good. 
+\end{namedtheorem}   
+
+%\foot{Recall that this means the cork twists $\smash{X_{P,\rot^j}}$ are diffeomorphic rel boundary to the cork replacements %$\smash{X_{C_0,C_j}}$ for all $j$.  In fact this first statement holds for any finite multicork that embeds trivially in the %$4$-ball, as the proof shows.}
+
+\proof  
+Since $(C_1,\dots, C_{n})$ embeds trivially in the 4-ball, we can for $i<n$ choose trivial embeddings of the $C_i$ in disjoint 4-balls $B_i$ in $X-C_n$.  This gives an embedding $C_1\cup\cdots\cup C_{n} \subset X$, which extends %(uniquely up to isotopy) 
+to an embedding of $P=\bsum$ in $X$, guided by a collection of disjoint arcs in $X-\cup C_i$ as illustrated in \figref{pinwheels}b.  Now $\rot^j$ rotates $P$ by a $(j/n){\text{th}}$ of a turn, so the cork twist $X_{P,\rot^j}$ is diffeomorphic to the 4-manifold $Y_j$ obtained from $X$ by replacing {\sl each} $C_i$ by $C_{i+j}$ (with subscripts mod $n$).   Since $C_i\subset B_i$ are trivial embeddings for $i<n$, and all diffeomorphisms of $\del B_i$ extend to $B_i$ (Cerf \cite{cerf}), these replacements have no effect except when $i=n$.  In particular, the identity map $Y_j-\medcup B_i \to X_{C_n,C_j}-\medcup B_i$ extends to a diffeomorphism $Y_j \to X_{C_n,C_j}$.  Thus $X_{P,\rot^j}$ is diffeomorphic to $X_{C_n,C_j}$ rel boundary, and so the embeddings $C_n\subset X$ and $P\subset X$ are correlated.
+
+Now assume that  $C_n\subset X$ is good; the closed case follows from this case by removing a ball.  We can assume that $\pi_1(B_i-C_i) = 1$, since the multicork is simple.  Let $Q$ be the obvious boundary sum $B_1 \bcs \cdots \bcs B_{n-1} \bcs C_n \subset X$ containing $P$.  Observe that any immersed loop $\alpha$ in $X-P$ is homotopic to a loop $\beta$ in $X- Q$, since each $B_i- C_i$ is simply-connected, and so $\alpha \cup -\beta$ bounds an immersed annulus $A$ in $X-P$. Since $Q$ is isotopic to $C_n$ in $X$, and $C_n\subset X$ is good, there is an immersed genus $0$ cobordism $B$ in $X- Q \subset X-P$ from $\beta$ to a collection $\gamma$ of loops in $\del X$. Now $A\cup B$ is an immersed genus $0$ cobordism in $X-P$ from $\alpha$ to $\gamma \subset\del X$, showing that $P\subset X$ is good. 
+
+Finally, assume that  $C_n\subset X$ is very good. Then the complement $X-Q$ can be built from $\partial X \times I$ using only 1 and 2-handles which cancel homotopically. Similarly, we can assume that $B_i-C_i$ is built from its boundary $S^3$ using only 1 and 2-handles which cancel homotopically, since the multicork is simple. Hence, only homotopically cancelling 1 and 2-handles must be added to $\partial (X-Q)$ to obtain $X-P$, showing that $P\subset X$ is very good. 
+ \qed
+
+
+%\begin{remark}
+%To prove the Finite Cork Theorem stated in the introduction, we will show that any finite list $\call = X_1,\dots,X_{n}$ of closed, simply-connected closed 4-manifolds homeomorphic to a given one $X$, is generated by an embedding $C\hto C_0\subset X$ for some order $(n+1)$ multicork $(C,C_1,\dots,C_n)$ (with all boundary identifications $h_i = \id$) that also has $n$ trivial embeddings $e_i:C_0\hto X$, all disjoint from $C_0$.  Thus we will have $n+1$ disjoint embeddings of $C_0$, one of which ...
+%\end{remark}
+
+%\begin{remark} For most of the multicorks $(C;(C_1, h_1),(C_2,h_2),\dots)$ that arise in this paper, the $C_i$'s will be obtained by surgery on $C$ and so the boundary identifications $h_i:\del C_i\to \del C$ will be obvious.  In such cases, we view $\del C$ and the $\del C_i$'s as being \emph{literally equal} rather than identified by diffeomorphisms, and simplify notation by writing the multicork as $(C;C_1,C_2,\dots)$.
+%\label{R:id}
+%\end{remark}    
+
+%Consider any list $\call = X_1, X_2, X_3, \dots$ of smooth manifolds homeomorphic to $X$.  For example, $\call$ could be an enumeration of {\it all} of the smooth manifolds homeomorphic to $X$, or just a constant list $X, X, X, \dots$. An embedded multicork $(C,\call_C)$ in $X$ is said to \emph{generate} $\call$ if $X_i \ = X_{C,C_i}$ for all $i$. Likewise, call a sequence of embedded multicorks $(C_i,\call_{C_i})$ a \emph{generating set} for $\call$ if each $(C_i,\call_{C_i})$ generates a list $\call_i$ such that $\call= \call_1 \cup \call_2 \cup \call_3 \dots$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\head{\ac-Corks}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Let $C$ be a compact 4-manifold built from the 4-ball by attaching $p$ 1-handles and $q$ 2-handles.  This handlebody is specified by a link $J\cup L$ in the 3-sphere, where $J$ is a dotted $p$-component unlink representing the 1-handles,\foot{The 1-handles can be viewed as trivial 2-handles carved out from the 4-ball, see for example \cite[Chapter I \S2]{kirby:4-manifolds}.  These 2-handles are obtained by pushing into $B^4$ a family of disjoint spanning disks in $S^3$ for the dotted circles.  Such families of disks are {\sl not} unique (up to isotopy rel boundary) in $S^3$, but they are unique in $B^4$.} and $L$ is a $q$-component framed link specifying the attaching circles for the 2-handles; we write $C = [J,L]$.  This handle structure induces a presentation
+$$
+\pi_1(C) \ = \ (x_1,\, \dots , \, x_p \ | \ r_1,\,\dots, \, r_q)
+$$  
+where the meridians of the components of $J$ represent the generators, and the components of $L$ trace out words $r_1,\dots, r_q$ (determined up to conjugacy) in the free group generated by $x_1,\dots, x_p$.  
+
+\begin{definition}  
+Assume now that $C=[J,L]$ is {\sl contractible}, so $p=q$ and $\pi_1(C)=1$. Furthermore, assume that $[J,L]$ can be transformed by handle slides into a handlebody $[J',L']$ inducing a trivial presentation
+$
+(x_1,\, \dots , \, x_p \ | \ x_1,\,\dots,\, x_p),
+$
+i.e.\ 
+% $L'$ \bit{homotopically pairs} with $J'$, or equivalently, 
+the 2-handles homotopically cancel the 1-handles as in \defref{def:good}.  Then we call $C$ (or $C$ equipped with a diffeomorphism $\del C\to\del C$) an \bit{\ac-cork}, and refer to $[J,L]$ as an \bit{\ac-structure} and $[J',L']$ a \bit{trivial \ac-structure} on $C$.  More generally, an \bit{\ac-multicork} $(C_0,C_1,\dots)$ is one for which {\sl all} the components are \ac-corks.
+\end{definition}
+
+
+The acronym \ac\ stands for Andrews-Curtis, referring to the Andrews-Curtis moves \cite{ac} on group presentations that correspond to 1 and 2-handle slides: \items
+\item[a)] replace a generator by its inverse or by its product with another generator, and
+\item[b)] replace a relator by its inverse or by its product with a conjugate of another relator.
+\stopitems
+% Note that repeated use of 1) can produce arbitrary reorderings of the generators, and similarly the relators can be reordered using 2).
+It is unknown whether all balanced presentations of the trivial group can be trivialized through Andrews-Curtis moves; this is the {\it Andrews-Curtis Conjecture}.   Even the weaker ``stable" version of this conjecture is unknown, where one allows the addition of new generators along with new relators equal to those generators, corresponding to the introduction of cancelling 1/2-handle pairs. 
+
+\begin{remarks}\label{double}  {\bf a)} The pinwheel of any \ac-multicork is an \ac-cork.
+
+\noindent  {\bf b)} If $C$ is an \ac-cork, then the double $C\cup -C$ is diffeomorphic to $S^4$.  Indeed $C\cup -C$ is the boundary of $C\times I \, \cong \, B^5$, since homotopy implies isotopy for curves in 4-manifolds. 
+\end{remarks}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\head{Zero-Dot Swaps and Classic Corks}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}\label{def:zerodotswap} Given a compact 4-manifold $C = [J,L]$ as above (not necessarily contractible), suppose that there are ordered sublinks $J_1\subset J$ and $L_1\subset L$ with an equal number of components, and with $L_1$ zero-framed, such that
+\items
+\item[\small\bf a)] $J_1$ and $L_1$ are {\it algebraically paired}, meaning $\lk(J_1,L_1)$ is an identity matrix, and 
+\item[\small\bf b)] the link $J^\dt$ obtained from $J$ by replacing $J_1$ by $L_1$ is an unlink.  
+\stopitems
+Then the 4-manifold $C^\dt = [J^\dt,L^\dt]$, where $L^\dt$ is the framed link obtained from $L$ by replacing $L_1$ by $J_1$ with the zero framing, is said to be obtained from $C=[J,L]$ by a \bit{zero-dot swap} on $(J_1,L_1) \subset (J,L)$, and we write $C{\sto} C^\dt$.  If both $[J,L]$ and $[J^\dt,L^\dt]$ are \ac-structures (so in particular $C$ and $C^\dt$ are contractible),
+and $[J-J_1, L-L_1]$ is a {\it trivial} \ac-structure, then $C\sto C^\dt$ is called a \bit{classic zero-dot swap}.  An example is shown in \figref{zerodotswap}.  
+%  \underset{(J_1,K_1)}
+\end{definition} 
+
+
+%%%%%%%%%% FIG 3 %%%%%%%%%%
+\fig{80}{FigZeroDotSwap}{
+\put(-370,0){\small$L_1$}
+\put(-392,30){\small$J_1$}
+\caption{A classic zero-dot swap on $(J_1,L_1)$}
+\label{zerodotswap}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{remark*} In general, $C$ and $C^\dt$ will have isomorphic homology.  Indeed their cellular boundary maps on the 2-cells are block triangular with identical diagonal blocks, $I$ and $\lk(J-J_1,L-L_1)$.  However $\pi_1(C)$ and $\pi_1(C^\dt)$ need not be isomorphic, even if $C$ is contractible (see Lickorish \cite{lickorish}).  Furthermore, there exist examples where both $C$ and $C^\dt$ are contractible, with $C=[J,L]$ an \ac-cork but $C^\dt = [J^\dt,L^\dt]$ not known to be \ac, even after adding extra cancelling 1/2-handle pairs (see Akbulut \cite{akbulut:SAC}). 
+\end{remark*}
+
+\begin{definition}\label{def:induced} If $C\sto C^\dt$ is any zero-dot swap, then $\del C$ and $\del C^\dt$ are naturally identified, indeed considered as {\sl literally equal} since the zero-dot swap amounts to surgery on the interior of $C$ along the circles and 2-spheres corresponding to the 1 and 2-handles being swapped.   Thus if $C$ and $C^\dt$ happen to be diffeomorphic, then we view the restriction of any diffeomorphism $H\colon C \to C^\dt$ to the boundary as a diffeomorphism $h\colon\del C \to \del C$, which is then said to be \bit{induced by the zero-dot swap}.  Changing $H$ may of course change $h$ (even its order) but won't change the diffeomorphism type of any cork twists $X_{C,h}$ associated with embeddings $C\subset X$.  
+% i.e.\ in the contractible case, won't change the {\it boundary equivalence class} of the cork $(C,h)$ as defined in \S1 of  \cite{akmr:equivariant}
+\end{definition} 
+
+\begin{definition}\label{classic}
+A \bit{classic cork} is a finite \ac-cork $(C,h)$ for which the non-trivial powers of $h$ are induced by classic zero-dot swaps on disjoint sublinks of some \ac-structure on $C$.  More generally, a \bit{classic multicork} is a finite \ac-multicork $(C_0,\dots,C_{n-1})$ with an \ac-structure $C_0 = [J,L]$ and disjoint sublinks $(j_i, \ell_i) \subset (J,L)$ \,(for $i=1,\dots,n-1$)\, such that the boundary identification $h_{i0}\colon\del C_0\to \del C_i$ is induced by a classic zero-dot swap on $(j_i,\ell_i)$.  
+\end{definition} 
+
+
+\begin{remark*} 
+\noindent The proofs of the cork theorem in the literature, and here (see \ref{ICT} below), produce classic corks. It follows that {\sl any} exotic pair of compact simply-connected 4-manifolds with diffeomorphic homology sphere boundaries have handlebody structures that differ by one classic zero-dot swap.
+\end{remark*}
+
+The following elementary result is a critical property of classic multicorks.  The argument is implicit in Kirby's treatment of the Involutory Cork Theorem \cite{kirby:cork} (cf.\ \cite[Fact; pp.\,576--581]{matveyev}).  The proof presented here generalizes a discussion of Lickorish in \cite{lickorish} (see also \cite{akbulut:SAC}). 
+
+\begin{namedtheorem}{Classic Multicork Lemma} \label{AClemma}
+All classic multicorks are simple. 
+\end{namedtheorem}
+
+\proof
+It is sufficient to show that if $(C, C^\dt)$ is an order 2 classic multicork, then $C\cup_h-C$ (or equivalently $C\cup -C^\dt$) is diffeomorphic to the $4$-sphere. By hypothesis, there is an \ac-structure $C =[J,L]$ such that $C^\dt$ is obtained by a classic zero-dot swap on a sublink $(j, \ell)\subset (J,L)$, and so $B = [J-j,L-\ell]$ is a {\sl trivial} \ac-structure.  Thus $B \cup -B \cong S^4$ by \remref{double}b, and both $j$ and $\ell$ bound families of embedded disks in $B$, with tubular neighborhoods $P$ and $Q$.  Now $C$ can be obtained from $B$ by a ``handle trade-off", carving out $P$ and adding $-Q$.  That is, $C = (B-P)\cup(-Q)$, and similarly $C^\dt = (B-Q)\cup(-P)$.  This gives a new decomposition of $B\cup -B = C\cup - C^\dt$, where the identification between $\del C$ and $\del C^\dt$ is the natural one associated to the zero-dot swap.  Thus $C\cup_h -C  \cong C\cup -C^\dt  \cong S^4$. 
+\qed 
+
+It follows from the Pinwheel \lemref{pinwheel} that for any embedding of a classic multicork, there is a correlated embedding of its pinwheel. Furthermore, the property of being classic persists.  
+
+\begin{namedtheorem}{Classic Pinwheel Lemma} \label{classicpinwheel}
+The pinwheel of a classic multicork is classic.  
+\end{namedtheorem}
+
+\proof Let $\calc = (C_0,\dots,C_{n-1})$ be a classic multicork, with \ac-structure $[J_0,L_0]$ on $C_0$, and sublinks $(j_i,\ell_i) \subset (J_0, L_0)$ for $i=1,\dots,n-1$ as in \defref{classic}. Then, each $C_i$ has an \ac-structure, given by $[J_i, L_i]$, which is the result of a classic zero-dot swap on $(j_i,\ell_i)$. Recall that the pinwheel $\pw(\calc) = (P,\tau)$, where $P = \bsum$ and $\tau$ rotates each $\del C_i$ to $\del C_{i-1}$. So, $P$ also has an \ac-structure $[\bj,\bl]$, where $\bj \cup \bl$ is a union of $J_i \cup L_i$ for $i=0, \dots, n-1$, lying in disjoint balls.  
+
+Now for each $k=1, \dots,n-1$, the map $\tau^k$ is induced by a zero-dot swap on a sublink $(j, l) \subset (\bj, \bl)$ consisting of the union of the sublinks $(\ell_i,j_i) \subset (J_i, L_i)$ for $i=1, \dots, n-1$, together with both $(j_k, \ell_k) \subset (J_0, L_0)$ and a sublink for which the zero-framed and dotted components are homotopically paired. Hence $[\bj-j, \bl-l]$ is \ac-trivial, since $(J_i -j_i, L_i-\ell_i)$ and $(J_0 -j_k, L_0-\ell_k)$ are \ac-trivial, by assumption. Therefore $(P, \tau)$ is a classic cork. 
+\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\head{The Involutory Cork Theorem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{definition} \label{def:classic}
+% A finite multicork $(C_0,\dots, C_{n-1})$ is  \bit{classic} if 
+% \items
+% \item[\small\bf a)] $C_0$ has a trivial \ac-structure $[J,L]$, 
+% \item[\small\bf b)] each $C_i$ for $i>0$ has an \ac-structure $[J_i,L_i]$ obtained from $[J,L]$ by a zero-dot swap, and 
+% \item[\small\bf c)] the markings $\del C_0 \to \del C_i$ are the identity maps induced by these zero-dot swaps.
+% \stopitems
+%A finite cork $(C,h)$ is $\bit{classic}$ if its associated multicork $\mu(C,h)$ is equivalent to a classic multicork, i.e.\ the powers $h^i$ of the gluing map are all induced by {\sl zero-dot swaps} (see \defref{def:zerodotswap}) on a {\sl fixed} \ac-trivial structure $[J,L]$ on $C$.  The Mazur cork \cite{akbulut:contractible} is an example in which $J\cup L$ is a symmetric link of two unknots, and the gluing involution is induced by swapping $J$ and $L$. 
+%\end{definition}
+
+% \begin{definition} \label{def:classic}
+% A finite multicork $(C_0,\dots, C_{n-1})$ is  \bit{classic} if 
+% \items
+% \item[\small\bf a)] $C_0$ has an AC structure $[I \cup J, K \cup L]$ with $J= \sqcup J_i$, $L= \sqcup L_i$, and $L_0, J_0= \emptyset$.   
+% \item[\small\bf b)] each $C_i$ for $i>0$ has an \ac-structure obtained from $[I \cup J, K \cup L]$ by a zero-dot swap on $(J_i,L_i)$, and 
+% $[I\cup J - J_i, K \cup L - L_i]$ is \ac-trivial,
+% \item[\small\bf c)] the markings $\del C_0 \to \del C_i$ are the identity maps induced by these zero-dot swaps.
+% \stopitems
+% We call $[I, K]$ the auxiliary handles and $[J,L]$ the basic handles.  A finite cork ...
+% \end{definition}
+
+
+
+
+%\def\tri{\textup{\,\rotatebox{90}{$\triangleright$}\,}}%{\,\tiny{\Updelta}\,}
+
+% \begin{namedtheorem}{Classic Lemma}\label{classic}
+%The pinwheel of a classic multicork is a classic cork.  Thus the pinwheel lemma \textup{(\lemref{pinwheel})} produces classic corks from classic multicorks.  
+%\end{namedtheorem}
+
+%\proof  Let $\calc = (C_0,\dots,C_{n-1})$ be a classic multicork, with trivial \ac-structure $[J,L]$ on $C_0$, and associated \ac-structures $[J_i,L_i]$ on $C_i$ for $i=1,\dots,n-1$ as in \defref{def:classic}.  Recall that the pinwheel $\pw(\calc)$ of $\calc$ is the cork $(P_0,\rot)$ where $P_0 = \bsum$ and $\rot$ rotates each $\del C_i$ to $\del C_{i-1}$.  Since each $C_i$ is diffeomorphic to $C_0$, $P_0$ has a trivial \ac-structure $[\calj,\call]$, where $\calj\cup \call$ is a union of $n$ copies of $J\cup L$, lying in disjoint balls.  For each $j$, let $P_j$ be obtained from $[\calj,\call]$ by a zero-dot swap on $(J_i\tri J_{i+j},L_i\tri L_{i+j})$ in the $i^\text{th}$ copy of $J\cup L$ (where $S\tri T$ denotes the symmetric difference $(S-T)\cup(T-S)$, and subscripts are taken mod $n$).  Then $\mu(\pw(\calc))$ is equivalent to the classic multicork $(P_0,\dots,P_{n-1})$, and so by definition $\pw(\calc)$ is classic.   This proves the first statement in the lemma.  The last statement follows from the proof of the pinwheel lemma.
+%\qed
+ 
+% Let $(C_0,\dots,C_{n-1})$ be a classic multicork as defined in \ref{def:classic}, and set $J_0 = L_0 = \varnothing$.  Recall from \defref{multicork} that the pinwheel $\pw(C_0,\dots,C_{n-1})$ is the cork $(P,\rot)$ where $P = \bsum$ and $\rot$ rotates each $\del C_i$ to $\del C_{i-1}$.  Thus $P$ has a handlebody structure $[\bj,\bl]$ given by $n$ separated copies of $[J,L]$, indexed by $i$ from $0$ to $n-1$,  by performing a zero-dot swap on $(J_i,L_i)$ in the $i$th copy.  The result is a disjoint union of \ac-structures, and thus an \ac-structure on $P$.  Now $\tau^k$ for $0<k<n$ has the effect of performing a special zero-dot swap on $(\bj_i,\bl_i) = (L_i\cup J_{i+k},J_i\cup L_{i+k})$ (with subscripts taken mod $n$) in the $i$th copy for $0<i<n$.  Since the $\bj_i$ are disjoint for $i>0$, and similarly for the $\bl_i$, this yields the desired special zero-dot swap on disjoint sublinks of $[\bj,\bl]$.  WAIT A MINUTE ... WE NEED THE SWAPPERS FOR DIFFERENT k TO BE DISJOINT
+
+With all the relevant background and notation established, we state the Involutory Cork Theorem in the form that will be most convenient. This result is due to Curtis-Freedman-Hsiang-Stong \cite{curtis-freedman-hsiang-stong} and Matveyev \cite{matveyev}; the added control on the fundamental group was established in \cite{curtis-freedman-hsiang-stong}, while the existence of an {\sl involutory} cork to do the job was shown in \cite{matveyev}.  In formulating this version of the theorem, we also benefited from discussions with Dave Auckley, who pointed out the applicability of Wall's work \cite{wall:diffeomorphisms} in the relative case. 
+
+\begin{namedtheorem}{Involutory Cork Theorem} \label{ICT}  
+Let $X$ and $Y$ be homeomorphic simply-connected $4$-manifolds that are either closed \textup{(the absolute case)} or compact with homology sphere boundary \textup{(the relative case)}.  In the relative case, choose a diffeomorphism $f\colon\del X \to \del Y$.  Then there is a classic involutory cork $(P,\tau)$ 
+% \textup{(involutory meaning $\tau^2=\id$)} 
+with a very good embedding $P \subset X$ \textup{(see \defref{def:good})} such that $X_{P,\tau}$ is diffeomorphic to $Y$, by a diffeomorphism that extends $f$ in the relative case.
+\end{namedtheorem}
+
+This version of the theorem can be derived from a careful reading of \cite{curtis-freedman-hsiang-stong} and \cite{kirby:cork}.  We briefly outline the proof of the relative case, which implies the absolute case by removing a ball.  
+
+First construct a relative h-cobordism $W$ from $X$ to $Y$, with the mapping cylinder of  $f$ on the lateral boundary, as follows: The closed manifold $Y \cup_f -X$ has zero signature, hence bounds a 5-manifold $V$ which, appropriately surgered, has a relative handlebody structure consisting of only $2$ and $3\text{-handles}$. After possibly introducing an extra cancelling 2/3-handle pair, split $V$ along its ``middle level" between the 2 and 3-handles, and re-glue using Wall's Theorem 2 \cite[pg.\ 136]{wall:diffeomorphisms} to obtain the desired h-cobordism $W$, built from $X \times I$ by adding only 2 and 3-handles. 
+
+Taking the union of $X \times I$ and the 2-handles of $W$ gives a relative cobordism from $X$ to the middle level $M \subset W$, which now contains two sets of embedded 2-spheres: the attaching spheres $A$ of the 3-handles of $W$, and the belt spheres $B$ of the 2-handles of $W$. By a sequence of handleslides and finger moves, one can arrange for $A \cup B$ to have simply-connected complement in $M$, and from this, produce a very good manifold $W \subset M$ containing $A \cup B$; similar techniques are used in the proof of the Encasement Lemma \ref{encasement} below.  Surgering the spheres $B\subset M$ and $A\subset M$ then yields \ac-corks $C\subset X$ and $D\subset Y$, related by a zero-dot swap.  
+
+Hence, the union of $M \times I$ with the 2 and 3-handles of $W$ (attached as 3-handles along $B \subset M \times 0$ and $A \subset M \times 1$, respectively) is a relative cobordism $V \subset W$ from $C$ to $D$. By construction, the induced map $\del C \to \del D$ is the natural one associated to the zero-dot swap, % (viewed as equality)
+and the complement $W-V$ is the product cobordism $(X-C)\times I$. In fact, one can ensure that the multicork $(C,D)$ is classic, with a very good embedding $C \subset X$. Furthermore, the product structure of the complement induces a diffeomorphism $X_{C,D} \to Y$ which extends the map $f$ on the boundary. 
+
+So by the Pinwheel \ref{pinwheel} and the Classic Pinwheel Lemma (\ref{classicpinwheel}), the pinwheel $(P,\tau)$ of the order 2 multicork $(C,D)$ is a classic involutory cork with a very good embedding in $X$ such that $f$ extends to a diffeomorphism $X_{P, \tau} \to Y$, as desired.   
+
+\begin{remark*}
+When $\del X_0$ is not a homology sphere, Theorem \ref{ICT} need not hold. For example, the automorphism of $\del(S^2 \times D^2) = S^2 \times S^1$ used to Gluck twist a 2-sphere \cite{gluck:2-spheres} cannot extend even after a cork twist, as there are 4-manifolds of opposite parity related by a Gluck twist (such as the honest and twisted products $S^2 \times S^2$ and $S^2 \tilde \times S^2$). 
+\end{remark*}
+
+The following result is implicit in the original cork theorem papers \cite{curtis-freedman-hsiang-stong}\cite{matveyev}:
+
+\begin{corollary}
+Any smooth homotopy 4-sphere $\Sigma$ is diffeomorphic to a twisted double $W \cup_{h} -W$ of a contractible $4$-manifold $W$, for some diffeomorphism $h\colon \del W\to\del W$, where the honest double $W\cup -W$ is diffeomorphic to $S^4$. 
+\end{corollary}
+
+\proof Begin by decomposing $\Sigma$ into the union of a 4-ball $B$ and the homotopy 4-ball $X=\Sigma- B$, meeting in a common 3-sphere $S = \del X = \del B$.  By the Relative Involutory Cork \thmref{ICT}, there is a classic cork $(C, \tau)$ with very good embedding $C \subset X$ and a diffeomorphism $h:X_{C,\tau}\to B$ extending the identity map on $S$.  By extending the corks $C\subset X$ and $C' = h(C) \subset B$ along arcs away from the cores of the handles, we may assume that $C$ and $C'$ meet $S$ in disjoint 3-balls $D$ and $E$.  Thus $X-C$ and $B-C'$ are diffeomorphic, and each is built from a 4-ball (the collar on $S - \interior(D)$ or $S - \interior(E)$) by adding homotopically cancelling 1 and 2-handles.   Hence $\Sigma = X\cup -B = W \cup Z$, where $W = (X-C) \bcs -C'$ and $Z = -(B-C') \bcs C$, which are both \ac.  Noting that there is a diffeomorphism $-W \to Z$, we have $\Sigma = W\cup_h-W$. Furthermore, since $W$ is \ac, the honest double $W\cup -W$ is diffeomorphic to $S^4$. 
+
+%%%%%%%%%% FIG 1 %%%%%%%%%%
+%\fig{126}{FigDouble.pdf}{
+\fig{140}{FigTwistedDouble}{
+\put(-292,110){$B$}
+\put(-305,26){$X$}
+\put(-299,70){$S$}
+\put(-270,38){$C$}
+\put(-226,102){\small$C'$}
+\put(2,34){$W$}
+\put(0,90){$Z\cong -W$}
+\caption{Both decompositions of $\Sigma$}
+\label{F:double}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{remark*}
+This result extends to any homeomorphic pair of simply-connected, smooth, closed 4-manifolds $X$ and $Y$, in which case $X \# -Y$ is diffeomorphic to a twisted double $Z \cup_h -Z$, where the honest double $Z\cup -Z$ is diffeomorphic to a connected sum of $S^2$-bundles over $S^2$. 
+\end{remark*}
+
+
+%%%%%%%%%
+%%%%%%%%%
+%%%%%%%%%
+\section{Cork Encasement}
+%%%%%%%%%
+%%%%%%%%%
+%%%%%%%%%
+
+The previous section showed how to obtain an embedding of a finite cork correlated with an embedding of a finite simple multicork. In this section, we show how to find a contractible submanifold whose cork replacements will be the components of the classic multicork used to prove our main theorems.  We begin by modifying a standard argument using finger moves to deal in advance with some fundamental group issues. 
+
+\def\X{\overbar X}
+\def\Q{\medcup C_i}
+
+
+
+\begin{namedtheorem}{Finger Lemma} \label{lem:finger}
+\it Any collection $C_1,\dots,C_n$ of good \ac-corks in a compact simply-connected $4$-manifold $X$ \textup{(meaning $C_i\subset X$ are all good embeddings; see \defref{def:good})} can be repositioned by isotopies so that their union is a good submanifold of $X$.
+\end{namedtheorem}  
+
+  
+% For notational convenience we write $\H$ for the core of a 2-handle $H$, $\A$ for the core 2-complex of $A$ (and similarly for each $A_i$).  Since $\pi_1(X-A)$ is normally generated by the belt circles of the 2-handles, it suffices to find a {\it dual sphere to $A$ through each 2-handle $H$}, meaning an {\it immersed 2-sphere} $\Sigma$ in $X$ intersecting the core 2-complex $\A$ of $A$ transversely in a single point on the core disk $\H$ of $H$, away from the other 2-handles.  If $H\subset A_i$ then we can at least find a dual $\Sigma$ of $A_i$ through $H$, since $\pi_1(X-A_i)=1$, but $\Sigma$ may intersect a 2-handle $H_j$ in some other $A_j$.  In this case, however, we can move $\Sigma$ so that the algebraic intersection number $\Sigma\cdot \H_j = 0$.  Indeed any point in $\Sigma\cap \H_j$ can be eliminated, without changing the algebraic intersection numbers of $\Sigma$ with any other 2-handle cores, by pushing $\Sigma$ with a finger move across the 1-handle in $A_j$ homotopically cancelled by $H_j$.  At this stage $\Sigma$ intersects $\A_i$ in a single point on $\H$, and has zero algebraic intersection number with every 2-handle core $\H_j\subset A_j$ for $j\ne i$.  Thus if $\Sigma\cap\H_j\ne\varnothing$, we can pair off the points $\Sigma \cap \H_j$ and construct immersed disks in the complement of $\A_j$ for the corresponding Whitney circles; this is possible since $\pi_1(X-A_j)=1$.   These disks can be arranged to be Whitney disks, as their framings can be modified as necessary by �boundary twisting� around $\Sigma$, at the cost of introducing additional intersection points of the Whitney disks with $\Sigma$.  Pushing each $\A_k$ for $k\ne j$ across $\A_j$ by finger moves, we can also arrange for the Whitney disks to lie in the complement of $\A$.  Now pushing $\Sigma$ across these immersed Whitney disks will eliminate all intersections of $\Sigma$ with $H_j$.  Repeating this process, we remove all the intersections of $\Sigma$ with $A$ outside $H$, as desired.  This completes the proof of the claim. 
+ 
+
+% For notational convenience we write $\H$ for the core of a 2-handle $H$, $\A$ for the core 2-complex of $A$ (and similarly for each $A_i$). 
+
+
+\begin{proof} 
+Fix trivial \ac-structures for the $C_i$.  Now pull the $C_i$ apart so that their 1-skeleta lie in disjoint 4-balls, and their core 2-skeleta intersect transversely, i.e.\ any $C_i$ and $C_j$ intersect only in plumbings between their 2-handles, arising from intersections of their core disks.  Then push the 0-handles of the $C_i$ together into a single 0-handle to ensure that the union $\Q$ is connected.  As $X$ is simply-connected, $\pi_1(X-\Q)$ is normally generated by the belt circles of the 2-handles.  
+ 
+To arrange for $\Q\subset X$ to be a good embedding, we may need to adjust the core 2-complexes of the $C_i$ by finger moves.  What is required by \defref{def:good} is that the belt circle $\sigma$ of each 2-handle, say in $C_j$, should have a {\sl good surface} (an immersed planar surface bounded by $\sigma$ and a collection of curves in $\del X$) in $X-\Q$.   Since $C_j \subset X$ is good, such a surface $\Sigma$ can be found in $X-C_j$, but $\Sigma$ might intersect the core disk $D$ of some 2-handle $H$ in another $C_k$, as shown in \figref{finger}a; the (red) dot in the middle of the figure represents the core of the 1-handle $h$ homotopically cancelled by $H$, and all the edges in the figure are cores of 2-handles.   In this case, any point in $\Sigma\cap D$ can be eliminated, without changing the algebraic intersection numbers of $\Sigma$ with any other 2-handle cores, by a finger move of $\Sigma$ along $D$ across $h$ (\figref{finger}b).  Thus by a sequence of finger moves, it can be arranged for $\Sigma$ to have zero {\sl algebraic} intersection number with the core of every 2-handle in $\Q$.  
+
+%%%%%%%%%% FIG 4 %%%%%%%%%%
+\fig{95}{FigFinger}{
+\put(-442,-20){a) $\Sigma\,\subset\, X\!-\!C_j$ \hskip 20pt b) finger move along $D$ \hskip 15pt c) finger move along $\Delta$ \hskip 15pt d) Whitney move}
+\put(-449,10){\small $\Sigma$}
+\put(-426,52){\small $D$}
+\put(-409,37){\small $h$}
+\put(-338,10){\small $\Sigma$}
+\put(-280,40){\small $\Delta$}
+\put(-292,58){\small $p$}
+\put(-292,35){\small $q$}
+\put(-255,33){\small $E$}
+\put(-260,80){\small $F$}
+\put(-225,10){\small $\Sigma$}
+\put(-167,40){\small $\Delta$}
+\put(-179,58){\small $p$}
+\put(-179,35){\small $q$}
+\put(-102,10){\small $\Sigma$}
+\caption{Producing an immersed disk $\Sigma$ in $X-\Q$ bounded by $\sigma$}
+\label{finger}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+If the {\sl geometric} intersection number of $\Sigma$ with the core $E$ of some 2-handle in $C_k$ is still nonzero, then choose a cancelling pair $p,q$ of points in $\Sigma\cap E$ and an associated Whitney circle $\delta$.  This circle has a good surface $\Delta$ in the complement of $C_k$, since $C_k$ is good (\figref{finger}b again).  Pushing the core $F$ of each 2-handle that intersects $\Delta$ across $E$ by a finger move (here we are moving the corks) we can arrange for $\Delta$ to lie in the complement of $\Q$ (\figref{finger}c).
+
+Now if $X$ is closed, then $\Delta$ is a disk.  A trivialization of the normal bundle of $\Delta$ induces a framing of $\delta$ which can be made to match the Whitney framing by ``boundary twisting"  $\Delta$ around $\Sigma$, at the cost of introducing additional intersection points between $\Delta$ and $\Sigma$ (see \cite[\S1.3--1.4]{freedman-quinn:4-manifolds}).  The result is an immersed Whitney disk $\Delta$ for $\delta$, giving rise to a regular homotopy of $\Sigma$ to eliminate the intersection points $p,q$, without adding any additional intersections between $\Sigma$ and $\Q$ (\figref{finger}d).  Repeating this process removes all the intersections of $\Sigma$ with $\Q$.  Since finger moves are supported near arcs, which miss disks in $X$ by general position, this process can be iterated to produce good surfaces for {\sl all} the belt circles of the 2-handles in $\Q$, completing the proof in the closed case.
+
+If $X$ has boundary, then $\Delta$ may have additional boundary components in $\del X$.  If so, then we use an analogue of the Whitney trick to replace $\Sigma$ by a genus zero surface $\Sigma_0$ with $\del\Sigma_0 = \del\Sigma\cup2\del\Delta$ and $\Sigma_0\cap(\Q) = \Sigma\cap(\Q)-\{p,q\}$, as follows:  First replace a pair $P,Q$ of disjoint disks about $p,q\in\Sigma$ with the boundary of a tubular neighborhood of the arc $\delta\cap E$.  The result is a genus 1 surface $\Sigma_1$ which intersects $\Delta$ in a circle $c$ parallel to $\delta$.  Let $\Delta'$ denote the closure of the component of $\Delta - c$ intersecting $\del X$. Since $\Delta'$ has at least two boundary components, its normal bundle can be trivialized by extending the framing of $c$ induced by $\Sigma_1$. So, we can surger $\Sigma_1$ along $c$, replacing an annular neighborhood of $c$ by two parallel (with respect to the trivialization) copies of $\Delta'$.  This gives the desired surface $\Sigma_0$, which we rename $ \Sigma$ for convenience.  As before, repeating this process produces good surfaces for all the belt circles of the 2-handles in $\Q$, completing the proof. 
+\end{proof}
+
+The next result shows how to embed a single good \ac-cork enclosing any finite collection of good \ac-corks in a compact simply-connected 4-manifold.  The proof is a variation on a construction of Richard Stong \cite{stong} that was used to control the fundamental group of the complement of a cork in the original proof of the cork theorem in \cite{curtis-freedman-hsiang-stong} (see also \cite{kirby:cork}, which provided a model for our proof).  
+
+% The setting for the latter was different; for example, the contractible manifolds $C_1, \dots , C_n$ replace the 2-spheres from the original proofs, and since there are various properties of the corks gotten through this construction which we wish to highlight, we provide a full proof. 
+
+
+\begin{namedtheorem}{Encasement Lemma}\label{encasement} 
+Any collection $C_1, \dots, C_n$ of \ac-corks in a compact simply-connected $4$-manifold $X$ can be isotoped to lie in a single \ac-cork $C$ in $X$.  If all the $C_i$ are good \textup{(as defined in \ref{def:good}, so implicitly $\del X$ is connected or empty)}, then $C$ can be chosen to be very good.
+\end{namedtheorem}  
+
+\pf
+As in the proof of the Finger \lemref{lem:finger}, choose trivial \ac-structures $C_i = [J_i,\,L_i]$ for $i=1,\dots,n$, and position the $C_i$ so that 
+\items
+\item[\small\bf a)]  their 0-handles coincide, 
+\item[\small\bf b)] the links $J_i\cup L_i$ lie in disjoint 3-balls in the boundary of the 0-handle, and 
+\item[\small\bf c)] the cores of the 2-handles attached along the $L_i$ intersect transversely.
+\stopitems
+Furthermore, assume by \lemref{lem:finger} that the union $\Q$ is good when all the $C_i$ are good.  In this position, $\Q$ can be obtained from the boundary sum 
+$$
+C_1\natural\cdots\natural \,C_n \ = \ [J,\,L_\circ] \ := \ [J_1\sqcup\cdots\sqcup J_n,\, L_1\sqcup\cdots\sqcup L_n]
+$$
+by plumbing the 2-handles together according to the intersections of their cores.  Each plumbing, corresponding to an intersection point $p$, has the effect of clasping the relevant attaching circles of $L_\circ$, where the sign of the clasp is given by the sign of $p$, and then encasing the clasp in a dotted circle. This changes $L_\circ$ into a framed link $L$, while the dotted circles about the clasps form an unlink $I$ disjoint from $J$ and homotopically unlinked from $L$, thus giving a handle structure 
+$$
+\Q \ = \ [I\cup J, \,L]
+$$
+built in a canonical way from $C_1\natural\cdots\natural \,C_n$.  We will refer to the 0-handle and the 1 and 2-handles given by $J$ and $L$ as \bit{basic handles}, and the handles given by $I$ as \bit{clasp $\bm{1}$-handles}.  This is illustrated in \figref{corkunion} for the case $n=2$ where $C_1$ (shown in green) is the Mazur manifold and $C_2$ (shown in blue) is the Akbulut-Matveyev ``positron" \cite{akbulut-yasui:corks-plugs}, embedded so that their 2-handles are plumbed three times geometrically, and once algebraically.  In the final picture, the basic handles are green and blue, while the clasp 1-handles are red.  
+
+%%%%%%%%%% FIG 1 %%%%%%%%%%
+\fig{80}{FigMazurAM}{
+\put(-327,-15){$C_1$}
+\put(-241,-15){$C_2$}
+\put(-130,-15){$\Q \ = \ C_1\cup C_2  \ \subset \ X$}
+\caption{Union of corks}
+\label{corkunion}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+To construct $C$, first extend the  handle structure $\Q = [I\cup J, \, L]$ to one on all of $X$ with no additional 0-handles.  The 1-handles in this decomposition that are {\sl not} basic will be called the \bit{auxiliary $\bm{1}$-handles} of $X$.  These include the clasp 1-handles, and are given by an unlink $I$ (extending the old $I$) that is still unlinked from $J$.
+% Next broaden the class of \bit{auxiliary $\bm{1}$-handles} to include {\it all} the 1-handles in $X-\Q$, extending $I$ to a dotted unlink (still denoted $I$) still unlinked from $J$. 
+Since $\pi_1(X)=1$ and the $[J_i,L_i]$ are {\sl trivial} \ac-structures, the $2\text{-handles}$ in $X-\Q$ can be slid over the basic 2-handles and over one another (after introducing cancelling 2/3-handle pairs in $X-\Q$ if necessary to avoid Andrews-Curtis issues) so that the auxiliary 1-handles are homotopically cancelled by a subset of the 2-handles in $X-\Q$.  We call these the \bit{auxiliary $\bm{2}$-handles}, and denote their attaching framed link by $K$.  Now provisionally set
+$$
+C \ = \ [I\cup J,\,K\cup L]
+$$  
+which by construction is a trivial \ac-structure, made up of all the basic and auxiliary handles.  Thus $C$ is an \ac-cork containing $\Q$, proving the first statement in the lemma.
+
+Now assume that the $C_i$, and a fortiori their union, are good.  At present $C$ consists of all the basic and auxiliary handles, which together will be referred to as the \bit{inner handles} of $X$; the handles in $X-C$ are called the \bit{outer handles}.  We assume that $\del X$ is {\sl nonempty} and connected, since the closed case follows by removing a ball.  We first want to arrange for $\pi_1(\del X)$ to normally generate $\pi_1(X-C)$, so that $C$ will be good.   To do so, we will introduce some number (depending on $\pi_1(X-\Q)$) of ``extra handles", also to be designated as inner handles, and then perform more handleslides.  All handles will retain their designations, even after sliding.  When the dust settles, $C$ will be defined once again as the union of all the inner handles, and will be seen to be very good.    
+
+\newcommand{\one}{X^{1}}
+\newcommand{\dualone}{\X^{1}}   
+\newcommand{\two}{X^{2}}
+\newcommand{\dualtwo}{\X^{2}}   
+\newcommand{\dualp}{\bar p}
+\newcommand{\dr}{\bar r}
+\renewcommand{\H}{\overbar H}
+
+Before delving into the argument, we set some terminology and notation.  In the process of building the handlebody $X$, collars will never be added between the handles, except for a final collar after all the handles are attached.  
+% Let $p$, $q$ and $r$ be the number of 1, 2 and 3-handles, respectively.  
+The union of the handles of index at most $k$ is called the \bit{$\bm{k}$-skeleton} of $X$, denoted $X^{k}$.   Turning $X$ upside down produces the dual handlebody $\X$, with \bit{dual $\bm{k}$-skeleton} $\X^{k}$ obtained by adding the dual handles of index at most $k$ to the collar on $\del X$.  The \bit{middle level} of $X$ is the 3-manifold 
+$$
+M \ = \ \del\one\cap\del\dualone
+$$ 
+which can be viewed as the complement in $\del\one$ of the $2$-handle attaching regions, or equivalently, the complement in $\del\dualone$ of the dual $2$-handle attaching regions.  By general position, it follows that the inclusion induced maps 
+$$
+p\,\colon\,\pi_1(M) \lto \pi_1(\one)
+\qquad\textup{and}\qquad
+\dualp\,\colon\,\pi_1(M) \lto \pi_1(\dualone)
+%\pi_1(\one) \underset p\lfrom \pi_1(M) \underset \dualp\lto \pi_1(\dualone)
+$$
+are surjective, where a base point in $M$ is implicit.  Note that $\pi_1(\one)$ is the free group $F_p$ with generators $x_1,\dots,\,x_p$ given by the $1$-handles of $X$, and $\pi_1(\dualone)$ is the free product $\pi_1(\del X)*F_r$ where $F_r$ is the free group with generators $y_1,\dots,\,y_r$ given by the dual 1-handles of $X$.  
+
+Now homotopy classes of unbased loops in $M$ naturally correspond to conjugacy classes in $\pi_1(M)$.
+% and hence in $\pi_1(X)$ and $\pi_1(\X)$ via $p$ and $\dualp$
+In particular the meridians and framed longitudes of the attaching circles of the 2-handles $H_i$ (ordered arbitrarily) correspond to conjugacy classes $m_i$ and $\ell_i$ in $\pi_1(M)$.  It is geometrically evident that the projected conjugacy classes $p(m_i)$ and $\dualp(\ell_i)$ are trivial, while 
+$$
+r_i \ = \ p(\ell_i)
+\quad\text{and}\quad
+\dr_i \ = \ \dualp(m_i),
+$$
+which record the attaching circles of the 2-handles $H_i$ and their duals $\H_i$, normally generate $\pi_1(\one)$ and $\pi_1(\dualone)$ (since $\pi_1(X)=1$); these are called the \bit{relators} and \bit{dual relators} of $X$.  It follows that the map
+$$
+p \times \dualp \,:\,  \pi_1(M) \lto \pi_1(\one) \times \pi_1(\dualone) \ = \ F_p*(\pi_1(\del X)*F_r)
+$$
+is surjective; cf.\ R.\ Stong's Lemma \cite[p.\,500]{stong} in the closed case (the proof is the same).  This was one of two key observations from \cite{stong} used to produce corks with simply-connected complements in closed $4$-manifolds \cite{curtis-freedman-hsiang-stong}, and is also a key to our argument below.  
+
+The other input from \cite{stong} is an analysis of the effect on the relators and dual relators of sliding one 2-handle $H_i$ over another $H_j$ along a path joining their attaching circles \cite[pp.\,499-500]{stong}.   This path induces an element of $\pi_1(M)$ (via a choice of arcs from its endpoints to the base point in $M$) which in turn is mapped by $p\times\dualp$ to a pair $(s,t)$ in $\pi_1(\one) \times \pi_1(\dualone)$.  The effect of the handle slide on $r_i$, $r_j$ and $\dr_i, \dr_j$ (viewed respectively as elements in $\pi_1(\one)$ and $\pi_1(\dualone)$ using the chosen arcs) is to change $r_i$ to $r_i(s r_j s^{-1})$, leaving $r_j$ fixed, and to change $\dr_j$ to $\dr_j(t^{-1}\dr_i^{-1} t)$, leaving $\dr_i$ fixed.  See \figref{handleslide}, where these changes are tracked by comparing longitudes and meridians of the attaching circles before and after the handleslide.  To summarize the effect of the slide, we say that it is performed \bit{along a path that conjugates by $(s,t)$}.  
+ 
+%%%%%%%%%% FIG 1 %%%%%%%%%%
+\fig{80}{FigHandleslide.pdf}{
+\put(-360,-15){$H_i$}
+\put(-300,-15){$H_j$}
+\put(-382,24){$\H_i$}
+\put(-324,24){$\H_j$}
+\put(-209,-15){$H_i + H_j$}
+\put(-132,-15){$H_j$}
+\put(-95,-15){$H_i+ H_j$}
+\put(-19,-15){$H_j$}
+\put(-108,35){$=$}
+%\put(-330,46){$\gamma$}
+\caption{Handlesliding along the dotted path} % $\gamma$
+\label{handleslide}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\noindent The following two sliding operations generate the modifications needed for our present purposes. \\[-7pt]
+
+\noindent {\bf Single slide:} Slide $H_i$ over $-H_j$ % (producing $H_i-H_j$)   
+along a path that conjugates by $(1, t^{-1})$\,: 
+\items
+\item [] $r_i \longmapsto r_ir_j^{-1}$ \ and \ $r_j \longmapsto r_j$ 
+\item [] $\bar r_i \longmapsto \bar r_i$ \ and \ $\bar r_j \longmapsto \bar r_j \, (t \bar r_i t^{-1})$
+\stopitems
+
+\noindent {\bf Double slide:} Slide $H_i$ over $-H_j$ along a path that conjugates by $(1, 1)$, and then back over $H_j$ (with the opposite orientation) along a path that conjugates by $(1, t^{-1})$\,: 
+\items
+\item [] $r_i \longmapsto r_i$ \ and \ $r_j \longmapsto r_j$
+\item [] $\bar r_i \longmapsto \bar r_i$ \ and \ $\bar r_j \longmapsto  \bar r_j \bar r_i (t \bar r_i^{-1} t^{-1}) = \bar r_j \, [\bar r_i,t]$
+\stopitems
+
+\smallskip
+\noindent In short, performing a single slide multiplies a dual relator of $X$ by a \emph{conjugate} of another, while double sliding multiplies a dual relator by a \emph{commutator} of another, without changing the associated relator.  With these operations in mind, we proceed with the proof.
+
+\smallskip 
+
+Suppose that the first $k$ dual relators $\bar r_1, \dots ,\bar r_k$ correspond to the attaching circles of the dual outer 2-handles. Thus, $\pi_1(X-C)= (y_1, \dots, y_r \st \bar r_1, \dots, \bar r_k)$. Note that $H_1(X-C)=0$ by a Mayer-Vietoris argument, since $\del C$ is a homology sphere. Using the fact that $H_1(\partial X)=0$ as well, we can slide the outer 2-handles over each other to arrange that $\bar r_i$ is homologous to $y_i$ in $\pi_1(\bar X^1)$. So, $y_i= \bar r_i\prod_{j=1}^{k_i} [a_{ij},b_{ij}]$ for some $a_{ij}, b_{ij} \in \pi_1(\bar X^{1})$. 
+
+In geometric terms, there is an immersed cobordism $\Sigma \subset \bar X^1$ between the conjugacy classes $\bar r_i$ and $y_i$ (thought of as unbased loops in $\bar X^1$) with $a_{ij},b_{ij}$ a symplectic basis for $H_1(\Sigma)$. In addition, since $p \times \dualp$ is onto, we can assume that the curves $a_{ij}$ lie in $M$ and are null-homotopic in $X^1$. To ensure that $C \subset X$ is very good, we will first modify $\bar X^2$ until the loop $\bar r_i$ is homotopic to $y_i$ in $\bar X^2$. We then handle slide the 2-handle with dual attaching word $\bar r_i$ along this homotopy, until $\bar r_i$ is homotopic to $y_i$ in $\bar X^1$ (i.e. $\bar r_i=y_i$).
+
+%%%%%%%%%% FIG 1 %%%%%%%%%%
+\fig{180}{algebra2.pdf}{
+\put(-232,12){$\bar e_{ij}$}
+\put(-424,112){$\bar r_i$}
+\put(-40,23){$y_i$}
+\put(-220,88){Step 2}
+\put(-352,106){Step 1}
+\put(-80,101){Step 3}
+\caption{The proof pictured homotopically, from the point of view of the dual handlebody. The red 2-handle is the (dual) extra 2-handle, and the blue and red dotted curves represent the words $a_{ij}$ and $b_{ij}$, respectively, with the basepoint for $\pi_1(\bar X^1)$ shown in green.}
+\label{inforder}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+{\bf Step 1:} First introduce cancelling 1/2-handle pairs to $C$, which we call the {\it extra handles}. 
+
+Double index these handles in correspondence with the $b_{ij}$'s from the commutators above. This adds new generators $x_{ij}$ to the presentation of $\pi_1(X^1)$, as well as new relators and dual relators labelled $e_{ij} \in \pi_1(X^{1})$ and $\bar e_{ij} \in \pi_1(\bar X^1)$. At present, $e_{ij}=x_{ij}$ while $\bar e_{ij}=1$. 
+
+Since $\Q$ is good, $\pi_1(X-\Q)$ is normally generated by the image of $\pi_1(\partial X)$ under the map induced by inclusion. So, $\pi_1(\bar X^{1})$ is normally generated by the dual relators of both the outer and inner 2-handles $\bar r_1, \dots, \bar r_k$ and $\bar r_{k+1}, \dots, \bar r_s$ (the dual relators of the basic 2-handles are \emph{not} required).  Thus each $b_{ij}$ is equal to a product of conjugates of the $\bar r_i$'s for $i=1, \dots, s$.
+
+{\bf Step 2:} Single slide the outer and inner 2-handles over the extra 2-handles to obtain $\bar e_{ij} = b_{ij}^{-1}$. 
+
+Now, the immersed surface $\Sigma$ can be surgered (replacing the annular neighborhood of $b_{ij}$ by parallel copies of the core of the extra 2-handle $\bar e_{ij}$) to produce an immersed annulus, which is the trace of a homotopy from $\bar r_i$ to $y_i$ in $\bar X^2$. The subsequent step drags $\bar r_i$ along this homotopy until there is an immersed annulus from $\bar r_i$ to $y_i$ in $\bar X^1$. 
+
+{\bf Step 3:} Double slide the extra 2-handles over the outer 2-handle with dual attaching word $\bar r_i$ until the outer 2-handle has dual attaching word $y_i=\bar r_i\prod_{j=1}^{k_i} [a_{ij},b_{ij}]$, by setting $c=a_{ij}$. 
+
+The basic handles are unaffected by steps $1$-$4$ above, while only step $3$ changes the attaching words of the inner and outer 2-handles by multiplying them by $x_{ij}$. However, as $e_{ij} = x_{ij}$, the union of the basic, inner, and extra 1 and 2-handles is AC (although the current handlebody structure is not necessarily AC trivial). So, take $C$ as this union. By construction, the cork $C$ is very good, since $X-C$ is built from $\partial X \times I$ using only 1 and 2-handles, where each 1-handle in $X-C$ is now homotopically cancelled by a 2-handle. 
+\qed
+
+
+%%%%%%%%%
+%%%%%%%%%
+%%%%%%%%%
+\section{Finite and Infinite Cork Theorems}
+%%%%%%%%%
+%%%%%%%%%
+%%%%%%%%%
+The cork consolidation result below is the main tool in this section.  It implies a relative finite cork theorem, which immediately gives the Finite Cork Theorem in the Introduction, but also serves as the main ingredient in the proofs of our infinite order results.  All of these results start with a (smooth) simply-connected $4$-manifold $X$ that is either {\sl closed} or {\sl compact with homology sphere boundary}, and a list $X_i$ of (not necessarily distinct) $4$-manifolds homeomorphic to $X=X_0$.  This list will either be finite of length $n$, or countably infinite; in either case the $X_i$ are indexed by integers $i$, with the convention in the finite case that $X_i = X_j$ when $i\equiv j\pmod n$, i.e.\ $i\in\bz_n$.
+
+
+
+
+\begin{namedtheorem}{Consolidation Lemma}\label{consolidation} 
+Fix a compact simply-connected $4$-manifold $X$ with homology sphere boundary, and an arbitrary finite list $X_i$ $(i\in\bz_n)$ of manifolds homeomorphic to $X = X_0$.  Let $(A_i, \tau_i)$ be classic involutory corks embedded in $X$ that twist to give $X_i$, via diffeomorphisms $f_i\colon X_{A_i,\tau_i} \to X_i$.  Then the $A_i$ can be isotopied to lie in a single order $n$ cork $(C,h)$ embedded in $X$, and diffeomorphisms $g_i\colon X_{C,h^i} \to X_i$ can be chosen which agree with $f_i$ on $\del X_{C,h^i}= \del X_{A_i,\tau_i}$. Furthermore, if each $A_i \subset X$ is good, then $C\subset X$ may be chosen to be very good.
+\end{namedtheorem}  
+
+\proof By the Encasement \lemref{encasement}, move the corks $A_1, \dots, A_{n-1}$ to lie in a single AC-cork $C_0 \subset X$, which can be assumed to be very good if each $A_i$ is good. The contractible manifold $C_i= (C_0)_{A_i, \tau_i}$ is obtained from $C_0$ by a zero-dot swap on a sublink $(j_i, \ell_i)$ such that $h_{0i} \colon \del C_0 \to \del C_i$ naturally identifies the boundaries. Furthermore, it can be seen from the construction in the proof of the Encasement Lemma that the $(j_i,\ell_i)$'s are pairwise disjoint, and the complement of each sublink is \ac-trivial.  Hence, the multicork $(C_0, C_1, \dots, C_{n-1})$ is classic.
+
+Now $X_{C_0, C_i}$ is diffeomorphic to $X_{A_i,h_i}$ rel boundary for each $i$. Thus, there is a diffeomorphism $X_{C_0, C_i} \to X_i$ restricting to $F_i$ on $\del X$. Applying Lemma \ref{pinwheel} produces the desired order $n$ cork $(C,h)$ with a very good embedding (the pinwheel), correlated with the embedding of $(C_0, C_1, \dots, C_{n-1})$. 
+\qed 
+
+\begin{namedtheorem}{Relative Finite Cork Theorem} \label{rfct}
+Given any finite list $X_1,\,\dots,\,X_{n}=X$ of homeomorphic, compact, simply-connected $4$-manifolds, each bounded by a homology sphere, and any choices of diffeomorphisms $F_i\colon\del X \to \del X_i$, there is a cork $(C,h)$ of order $n$ and a very good embedding $C \subset X$ such that $F_i$ extends to a diffeomorphism $X_{A,h^i} \to X_i$ for each $i$.
+\end{namedtheorem} 
+
+\proof By the Involutory Cork Theorem (Theorem \ref{ICT}), there are classic involutory corks \break $(A_1, \tau_1), \dots, (A_{n-1}, \tau_{n-1})$  with very good embeddings $A_i \subset X$, such that $F_i$ extends to a diffeomorphism $X_{A_i,h_i} \to X_i$ for each $i$. Thus, the Relative Cork Theorem follows as a corollary from the Consolidation Lemma. \qed 
+
+\begin{remarks}
+{\bf a)} The Finite Cork Theorem stated in the introduction is an immediate corollary of the Relative Finite Cork Theorem above, by removing a $4$-ball.
+
+\noindent {\bf b)} Following the proof of Theorem 5 in \cite{akbulut-matveyev:positron}, both the finite order cork $(C,h)$ and its complement can be made Stein, in the usual sense. Essentially, since the multicork $(C_0, C_1, \dots, C_{n-1})$ from the proof of the Consolidation Lemma \ref{consolidation} and the complement $X-C_0$ have handlebody structures consisting of only 1 and 2-handles, the proof in \cite{akbulut-matveyev:positron} applies. In outline, first the complement $X-C_0$ is made Stein, followed by each component of the multicork. This involves adding only homotopically cancelling pairs of 1 and 2-handles to each manifold, and so the embedding of the Stein manifold $C_0 \subset X$ remains very good. A Stein structure for the cork $(C,h)$ is then obtained by extending the argument that the pinwheel of an order 2 multicork with Stein components is Stein, found in Part 3 of the proof of Theorem 5 from \cite{akbulut-matveyev:positron}, to a pinwheel with finitely many components. 
+
+\noindent {\bf c)} The Finite Cork Theorem allows one to generalize many conclusions that can be drawn from the Involutory Cork Theorem. The relative version in particular helps to localize corks. For instance, suppose the manifolds $X_1, \dots, X_{n-1}$ are homeomorphic to an elliptic surface $E(m)$, and obtained from it by log transforms and/or Fintushel-Stern knot surgeries \cite{fs:knot-surgery} along regular fibers.  Then, the Relative Finite Cork Theorem produces a finite order $n$ cork $(C , \tau)$ embedded in the nucleus $N$ of $E(m)$ such that $E(m)_{C,\tau^i}$ is diffeomorphic to $X_i$. 
+Indeed, all knot surgeries and log transforms may be performed inside of the nucleus $N$, generating a list of manifolds $N_1, \dots, N_{n-1}$ all homeomorphic to $N$ by \cite[Prop. 3.4]{gompf:nuclei} and the argument in \cite[pg.\,4]{fs:knot-surgery}.  Since $N$ is simply-connected with integer homology sphere boundary, 
+% (see \cite{gompf:nuclei}, Prop. 3.1)
+the Relative Finite Cork Theorem produces a finite order $n$ cork $(C , \tau)$ with $C \subset N$ such that $N_{C,\tau^i}$ is diffeomorphic to $N_i$. However, by Lemma 3.7 in \cite{gompf:nuclei}, all diffeomorphisms of $\partial N$ extend over $E(m) - N$. So, the manifolds $X_i$ are diffeomorphic to the cork twists of $C$, as desired. 
+
+\end{remarks}  
+
+
+Ironically, the Consolidation Lemma can also be used to \emph{separate} a finite collection of corks, as shown in the following lemma. 
+
+\begin{namedtheorem}{Separation Lemma}\label{seplemma} 
+Let $X = X_0,\,X_1,\,\dots$ be any list of of homeomorphic, closed, simply-connected $4$-manifolds. Then, there are disjoint classic involutory corks $(A_0, h_0), (A_1, h_1), \dots$ with very good embeddings $A_i \subset X$ such that $X_{A_i, h_i}$ is diffeomorphic to $X_i$ for each $i$. 
+\end{namedtheorem}  
+
+\proof 
+The Involutory Cork \thmref{ICT} provides a list $(A_1, h_1), (A_2,h_2), \dots$ of classic involutory corks with very good embeddings $A_i \subset X$ such that $X_{A_i, h_i}$ is diffeomorphic to $X_i$ for each $i$. The $A_i$'s may overlap dramatically in $X$, but this can be remedied by modifying the list of corks inductively. 
+
+Suppose the first $n$ corks $A_1, \dots, A_n$ are already disjoint. By the Consolidation Lemma, there is an order $n+2$ \ac-cork $(C, h)$ with very good embedding $C \subset X$ containing $A_1, \dots, A_{n+1}$ such that $X_{C, h^{n+1}}$ is diffeomorphic to $X_{n+1}$. Although the Consolidation Lemma requires an initial isotopy of all the $A_i$'s in general, in this case we need only isotop $A_{n+1}$ since the corks $A_1, \dots, A_n$ are disjoint. As the complement $X- C$ is simply-connected, by the Involutory Cork Theorem, there exists an involutory classic cork $(A_{n+1}', h_{n+1}')$ with very good embedding $A_{n+1}' \subset X- C$ such that $X_{A_{n+1}', h_{n+1}'}$ is diffeomorphic to $X_{n+1}$. The embedding of $A_{n+1}' \subset X$ is also very good, since $C$ is \ac. Substituting $A_{n+1}'$ for $A_{n+1}$, the first $n+1$ corks in the list are disjoint. 
+\qed
+
+\begin{remarks*} 
+{\bf 1)} The proof fails in the relative case, as we can only arrange that the embedding $C \subset X$ is very good, and not that $X-C$ is simply-connected. This prevents us from applying the Involutory Cork Theorem. 
+
+{\bf 2)}  Since $X$ is compact, the infinite list of corks produced must have widths tending to $0$ with respect to any given metric on $X$.  Here the {\it width} of a subset $C$ of $X$ is the supremum of the diameters of all balls embedded in $C$. 
+
+{\bf 3)} For a related and concrete example, see Theorem 1.3 in \cite{akbulut-yasui:knotting-corks}. Finitely many disjoint corks are found in an adequately blown up elliptic surface, each of whose twists produce a distinct exotic smooth structure. 
+\end{remarks*}
+
+
+
+%Let $W_1,\, \dots, \, W_n$ be a finite list of compact, simply-connected, smooth $4$-manifolds with homology $3$-sphere boundaries, all homeomorphic to a given one $W$. For any list of diffeomorphisms $h_i:\del W \to \del W_i$, there is a classic cork $(C,h)$ and an embedding $C \subset int(X)$, with the natural map $\pi_1(\del X) \to \pi_1(X-C)$ surjective, such that $h_i$ extends to a diffeomorphism $X_{C,h^i} \to W_i$ for each $i$.
+
+%\pf This follows as a corollary of Freedman's statement of the cork theorem for compact, h-cobordant manifolds. It remains only to show that . So, consider the closed 4-manifold $X= W \cup_h -W'$. We follow the standard scheme to prove the existence of a relative h-cobordism with boundary $X$. Since $W$ and $W'$ are homeomorphic, the signature of $X$ vanishes, and so $X$ bounds a 5-manifold $P$. Fix a handle structure for $P$. As $P$ is connected, we may assume there are no $0$ or $5$-handles. Surger $P$ internally, along the core sphere of each 1-handle, so that $\pi_1(P)=1$.  Do the same for each 1-handle of $-P$, to eliminate all $4$-handles of $P$. 
+
+%Now, $P$ is built from $W \times I$ using only $2$ and $3$-handles. However, these handles may not algebraically cancel. So, add cancelling 2-3 pairs to the cobordism $P$ if necessary to ensure that its middle level $M$ is diffeomorphic to both $W_{\times}= W \cs n S^2 \times S^2$ and $W_{\times}'=W' \cs n S^2 \times S^2$ for $n \geq 2$. Using Wall's result for compact manifolds with integer homology sphere boundaries (Theorem 2 from Diffeomorphisms of 4-manifolds), the cobordism $P$ can be cut along the middle level, and then re-glued via a diffeomorphism which algebraically pairs the 2 and 3-handles. Since Wall produces diffeomorphisms supported in the neighborhood of 2-spheres in the interior of the manifold, this leaves $\del M$ fixed (and so does not affect the boundary of the relative cobordism). 
+
+%Then, not only is $P$ simply connected, but the relative homologies $H_*(P, W)$ and $H_*(P, W')$ vanish. So, by Whitehead's Theorem, $P$ is a relative h-cobordism. Thus by Freedman, there is a contractible manifold $C \subset W, W'$ such that $h$ extends to a diffeomorphism $H: W-C \to W'-C$. Then, there is a diffeomorphism $W_{C,H^{-1}} \to W'$ that extends $H$. 
+
+%In particular, there is a diffeomorphism $f: W_{\times} \to W'_{\times}$ which induces an isomorphism $f_*: (H_2(W_{\times}; \bz), \cdot) \to (H_2(W'_{\times}; \bz), \cdot)$ on intersection forms. Since $W$ and $W'$ are homeomorphic, there is also an isomorphism $\hat h$ from the intersection form $Q_{W}$ to $Q_{W'}$, inducing an isomorphism $h= \hat h\ \oplus\ n \mathds{1}_H$ from the intersection form $Q_{W} \oplus n H$ (for $W_{\times}$) to $Q_{W'} \oplus n H$ (for $W'_{\times}$). Thus, $(f_*)^{-1} \circ h$ is an automorphism on $(H_2(W_{\times}; \bz), \cdot)$. By Wall (Theorem 2 from Diffeomorphisms of 4-manifolds), there is a diffeomorphism $g: W_{\times} \to W_{\times}$ realizing $g_*=(f_*)^{-1} \circ h$.  the cobordism $P$ can be cut along the middle level then reglued via the diffeomorphism $g$ induces the isomorphism $f_* \circ g_*= f_* \circ (f_*)^{-1} \circ h = h$ from $(H_2(W_{\times}; \bz), \cdot) \to (H_2(W'_{\times}; \bz), \cdot)$. Thus, the 2 and 3-handles (from the $S^2 \times S^2$ summands, or algebraically the hyperbolic summands) are algebraically paired. Note, we can ensure $\del M$ is fixed by $f$ (and so regluing by $f$ does not affect the relative cobordism) since Wall produces diffeomorphisms supported in the neighborhood of 2-spheres in the interior of the manifold. 
+
+Now the Infinite Cork Theorem stated in the introduction follows from the Separation \lemref{seplemma} and an infinite analogue of the pinwheel construction introduced in \S1.
+
+\begin{icthm*}\label{icthm}
+Given an arbitrary infinite list $X_i$ $(i\in \bz)$ of homeomorphic, closed, simply-connected $4$-manifolds , there is a noncompact cork $(C,\rot)$ and an embedding $C \subset X= X_0$ whose cork twists $X_{C,\rot^i}$ are diffeomorphic to $X_i$ for each $i$.
+\end{icthm*}
+
+\proof 
+The Involutory Cork \thmref{ICT} and the Separation \lemref{seplemma} provide classic order 2 corks $(A_i, \tau_i)$ with disjoint embeddings $A_i \subset X$ such that $X_{A_i, h_i}$ is diffeomorphic to $X_i$ for each $i$.  Since $X = X_0$, we may take $A_0 = B^4$.   At any finite stage in the inductive  proof of \lemref{seplemma}, 1-handles can be added so that in the limit, we produce an embedding of the infinite boundary sum $C_0= \dots \natural~ A_{-1} ~\natural~ A_0 ~\natural~ A_1~ \natural \dots$ (with two ends) into $X$, extending the embeddings of the $A_i$. 
+ 
+Let $C_i= (C_0)_{A_i, \tau_i}$ for each nonzero $i\in\bz$.  Since the $A_i$ embed trivially in $B^4$, there is also a trivial embedding of the multicork $(C_0, C_1, C_{-1}, \dots)$ into $B^4$. Removing a collar from $A_0$ if necessary, there is certainly enough room in the complement of $C_0$ to trivially embed the $C_i$ for $i\ne0$ in disjoint 4-balls $B_i$, and to also embed one more 4-ball $B$ disjoint from all the $C_i$. The infinite order non-compact cork $(C,h)$ will be built from these pieces; it is the infinite analog of a finite order pinwheel. 
+
+FIX INDICES $n\mapsto k$ or $j$ (avoid $i$ since it's serving double duty?).  
+
+Mimicking the construction of a finite order pinwheel (see Definition \ref{def:pinwheel}), consider the infinite order automorphism $\rot$ of the once punctured 3-sphere, defined as follows. Start with the parabolic M{\"o}bius  transformation $\phi(z)= {z}/{(1-z)}$ of the upper half plane $\bh \subset \bc$. Then, viewing $S^3 - \{\pt\}$ as the product $\bh \times \br$, set $\rot = \phi \times \id_{\br}$.  This automorphism generates an action of the infinite cyclic group on $S^3 - \{\pt\}$.  Now take a principal orbit $\dots, x_{-1}, x_0,x_1, \dots $ of this action, with $h^{n}(x_n)=x_0$ where $x_0= (i,0) \in \bh \times \br$; thus the $x_n$ form a doubly infinite sequence of points on a horocycle in $\bh\times 0$ (namely the Euclidean unit circle centered at $(i/2,0)$) converging to $(0,0)$ as $n\to\pm\infty$.  In addition, take a point $y_0\in\del A_0 \subset \del C_0$, and set $y_n= h_n(y_0)\in \del A_0 \subset \del C_i$ for $n\not=0$, where $h_{n0}\colon\del C_0\to \del C_n$ is the natural identification of the boundaries. Let $C$ be an infinite boundary connected sum of the $C_n$, built from the disjoint union $B \sqcup (\dots \sqcup C_{-1} \sqcup C_0 \sqcup C_1 \dots)$  by adding 1-handles joining $x_n\in S^3-\{\pt\}$ to $y_n\in \del C_i$ for each $n$. Since the $x_n$ have no limit point in $S^3-\{\pt\}$, this results in a non-compact manifold. Moreover, $h$ extends to a rotation of $\del C$ sending $\del C_n$ to $\del C_{n-1}$ via the boundary identification $h_{(n-1)n} = h_{n-1}h_n^{-1}$. 
+
+The embeddings of the $C_i$'s (all of which are trivial, except for $C_0 \subset X$) and $B$ into $X$ give an embedding of $C \subset X$. As in the Pinwheel Lemma (\ref{pinwheel}), the cork twist $X_{C,h^i}$ is diffeomorphic to $ X_{A_i, \tau_i}$ for each $i$. This follows from noting that the punctured manifold $X_{C_0, C_i}- \bigsqcup_j B_j$ is diffeomorphic to $ X_{C,h^i}- \bigsqcup_j (B_j)_{C_j, C_{j+i}}$, where each $(B_j)_{C_j, C_{j+i}} \simeq B^4$ since the embedding $C_i \subset B_i$ is trivial. So, this diffeomorphism between the punctured manifolds extends across each 4-ball. \qed
+
+%%%%%%%%%% FIG 1 %%%%%%%%%%
+\fig{260}{infcork.pdf}{
+\put(-338,82){$i/2$}
+\put(-242,172){$h$}
+\put(-414,198){$C_0$}
+\put(-348,180){\small $A_0$}
+\put(-324,198){\small $A_{-1}$}
+\put(-376,198){\small $A_{1}$}
+\put(-220,84){$C_1$}
+\put(-490,84){$C_{-1}$}
+\put(-246,33){$C_2$}
+\put(-454,33){$C_{-2}$}
+\put(-40,40){$X$}
+\caption{A schematic of the cork $(C,h)$ abstractly (left), and embedded in some manifold $X$ (right)}
+\label{inforder}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Alternatively, one might consider the \emph{open}, rather than bounded, non-compact analog of a cork. Given a list of homeomorphic, simply-connected 4-manifolds $X=X_0, X_1, X_2, X_3\,\dots$, the Encasement Lemma \ref{encasement} quickly implies (even in the relative case) the existence of a list of open contractible $4\text{-manifolds}$ $C_1,C_2,C_3,\,\dots$ whose ends are naturally identified with the ends of $C$, such that the replacement $X_{C,C_i} = (X-C)\cup C_i$ is diffeomorphic to $X_i$ for each $i$. However in this case, it is unclear (and unlikely) that the $C_i$ are diffeomorphic, or even that their ends are well-controlled. Luckily, it was suggested to us by Bob Gompf at the Mexico Conference that we might achieve a stronger result, by mimicking the proof of the Infinite Cork Theorem and using the work of Casson \cite{casson} and Freedman \cite{freedman:simply-connected}. Not only can we take $C=C_i$ above, but can in fact require that $C$ be homeomorphic to $\mathbb{R}^4$. 
+
+\begin{corollary} 
+Let $X_1, X_2, X_3\,\dots$ be an infinite list of closed, simply-connected \break $4$-manifolds $($possibly with repetitions$)$, all homeomorphic to a given one $X$. There is a submanifold $R \subset X$, homeomorphic to $\mathbb{R}^4$ and with an infinite order map $g$ on its end, such that $X \cup_{g^i} R$ is diffeomorphic to $X_i$ for each $i$.
+\end{corollary}
+
+\proof Let $(A_i,\tau_i)$ be the disjoint corks from the proof of the Infinite Cork Theorem above. Following the construction described in \cite{demichelis-freedman:exoticR4}, one can find open (hence smooth) manifolds $R_i \subset A_i$ homeomorphic to $\mathbb{R}^4$ with involutions $\sigma_i$ on their ends such that the diffeomorphism $\tau_i$ on $\partial A_i$ extends over $(A_i)_{R_i, \sigma_i}$. Hence, each embedding $A_i \subset X$ provides an embedding $R_i \subset X$ such that twisting $R_i$ yields a manifold diffeomorphic to the cork twist on $A_i$. 
+
+The pair $(R,g)$ is defined analogously to the cork $(C,h)$, with the $R_i$ replacing the corks  $A_i$ at every step of the construction described in the previous proof: first ``end sum" the $R_i$ to form $R$ (this operation is the analog of boundary-summing for open manifolds, first defined in \cite{gompf:3exoticR4} and \cite{gompf:infiniteexoticR4}), then define the map $g$ to twist the end of $R$ appropriately. \qed
+
+ 
+
+
+
+\begin{thebibliography}{10}
+
+\bibitem{akbulut:contractible}
+S.~Akbulut, \emph{A fake compact contractible {$4$}-manifold}, J. Differential
+  Geom. \textbf{33} (1991), no.~2, 335--356. %\MR{92b:57025}
+
+\bibitem{akbulut:SAC}
+\bysame,
+\emph{Cork twisting Schoenflies problem}, J. G\"okova Geom. Topol. GGT {\bf 8} (2014), Volume~8, 35-43. %\MR{3310571}
+
+\bibitem{akbulut-matveyev:positron}
+S.~Akbulut and R~Matveyev, \emph{A convex decomposition theorem for 4-manifolds}, Internat. Math. Res. Notices \textbf{7} (1998), 371--381. 
+
+\bibitem{akbulut-ruberman:absolute}
+S.~Akbulut and D.~Ruberman, {\em Absolutely exotic contractible $4$-manifolds}.  Comm. Math. Helv., \textbf{91} (2016), no.~1, 1--19. 
+  
+\bibitem{akbulut-yasui:corks-plugs}
+S.~Akbulut and K.~Yasui, \emph{Corks, plugs and exotic structures}, J.
+  G\"okova Geom. Topol. GGT \textbf{2} (2008), 40--82. %\KR{2466001  (2009k:57036)}
+
+\bibitem{akbulut-yasui:knotting-corks}
+\bysame, \emph{Knotting corks}, J. Topol. {\bf 2} (2009), no.~4. %\MR{2574745}
+
+\bibitem{ac}
+J.~J.~Andrews and M.~L.~Curtis, \emph{Free groups and handlebodies}, Proc. Amer. Math. Soc. \textbf{16} (1965), no.~2, 192--195. %\MR{92b:57025}
+  
+\bibitem{akmr:isotopy}
+D.~Auckly, H-J.~Kim, P.~Melvin and D.~Ruberman,
+{\em Stable isotopy in four dimensions},
+J. Lond. Math. Soc.,
+\textbf{91}, (2015), 439--463.
+
+\bibitem{akmr:equivariant}
+\bysame,
+{\em Equivariant corks}, to appear in Alg. and Geom.\ Top.
+\newblock \url{http://arXiv:1602.07650}, 2016.
+
+\bibitem{casson}
+A.~Casson, \emph{Three lectures on new infinite constructions in 4-dimensional manifolds}, (notes prepared by L. Guillou), A la Recherche de la Toplogie Perdue, Progress in Mathematics vol. 62, Birkh\"auser, 1986, pp. 201-244. 
+
+\bibitem{cerf}
+J.~Cerf, \emph{Sur les diff\'eomorphismes de la sph\'ere de dimension trois $(\Gamma_4 = 0)$}, Lecture Notes in Math. 53, Springer-Verlag, Berlin (1968).
+
+\bibitem{curtis-freedman-hsiang-stong}
+C.~L.~Curtis, M.~H.~Freedman, W.~C.~Hsiang, and R.~Stong,
+  \emph{A decomposition theorem for {$h$}-cobordant smooth simply-connected
+  compact {$4$}-manifolds}, Invent. Math. \textbf{123} (1996), no.~2, 343--348.
+  %\MR{1374205 (97e:57020)}
+
+\bibitem{demichelis-freedman:exoticR4}
+S. ~DeMichelis and M.~H.~Freedman, \emph{Uncountably many exotic $\mathbb{R}^4$'s in standard 4-space}, J.
+  Diff.\ Geo. \textbf{35} (1992), 219--254.
+
+\bibitem{fs:knot-surgery}
+R.~Fintushel and R.~J.~Stern, \emph{Knots, links, and $4$-manifolds}, Invent.
+Math. \textbf{134} (1998), no.~2, 363--400.
+
+\bibitem{freedman:simply-connected}
+M.~H.~Freedman, \emph{The topology of four--dimensional manifolds}, J.
+  Diff.\ Geo. \textbf{17} (1982), 357--432.
+
+\bibitem{freedman-quinn:4-manifolds}
+M.~H.~Freedman and F.~Quinn, \emph{Topology of {$4$}-manifolds}, Princeton University Press, Princeton, 1990.
+
+\bibitem{gluck:2-spheres}
+H.~Gluck, \emph{The embedding of two-spheres in the four-sphere}, Bull. Amer. Math. Soc. {\bf 67} (1961). %\MR{0131877}  
+
+\bibitem{gompf:3exoticR4}
+R. Gompf, \emph{Three exotic $\mathbb{R}^4$'s and other anomalies},  J. Diff.\ Geo. {\bf 18} (1983), 317--328. 
+
+\bibitem{gompf:infiniteexoticR4}
+R. Gompf, \emph{An infinite set of exotic $\mathbb{R}^4$'s}, J. Diff.\ Geo. {\bf 21} (1985), 283--300. 
+
+\bibitem{gompf:nuclei}
+R. Gompf, \emph{Nuclei of elliptic surfaces}, Topology {\bf 30} (1991), no.~3, 479--511. %\MR{1113691}
+
+\bibitem{gompf-stipcitz}
+R.~Gompf and A. ~Stipcitz, \emph{4-Manifolds and Kirby Calculus},  Grad. Studies in Math {\bf 20}, Amer. Math Soc., Providence, 1999.  
+
+\bibitem{kirby:4-manifolds}
+R.~C.~Kirby, \emph{The topology of {$4$}-manifolds}, Lecture Notes in Mathematics, vol. 1374, Springer-Verlag, Berlin, 1989. %\MR{1001966   (90j:57012)}
+
+\bibitem{kirby:cork}
+\bysame, \emph{Akbulut's corks and h-cobordisms of smooth, simply-connected $4$-manifolds}, Turkish J. Math. \textbf{20} (1996), 85--93.
+  
+\bibitem{lickorish}
+W.~B.~R.~Lickorish, \emph{Knotted contractible $4$-manifolds in $S^4$}, Pacific J. Math. \textbf{208} (2003), no.~2, 283--290.
+
+\bibitem{matveyev}
+R.~Matveyev, \emph{A decomposition of smooth simply-connected
+  {$h$}-cobordant {$4$}-manifolds}, J. Differential Geom. \textbf{44} (1996),
+  no.~3, 571--582. %\KR{1431006 (98a:57033)}
+
+\bibitem{os:adjunction}
+P.~Ozsv\'ath and Z.~Szab\'o, \emph{Higher type adjunction inequalities in Seiberg-Witten theory}, J. Differential Geom. \textbf{55} (2000),
+  no.~3, 385--440. 
+
+\bibitem{palais}
+R.~Palais, \emph{Extending diffeomorphisms}, Proc. Amer. Math. Soc. \textbf{11} (1960), 274--277.
+
+\bibitem{stong}
+R.~Stong, \emph{A structure theorem and a splitting theorem for simply-connected $4$-manifolds}, Math.\ Res.\ Letters \textbf{2} (1995), 497--503.
+
+\bibitem{tange}
+M.~Tange,
+{\em Non-existence theorems on infinite order corks}, prepint
+\newblock \url{http://arXiv:1609.04344}, 2016.
+
+\bibitem{wall:forms}
+C.~T.~C. Wall, \emph{On the orthogonal groups of unimodular quadratic forms}, Math. Annalen \textbf{147} (1962), 328--338. 
+
+\bibitem{wall:diffeomorphisms}
+\bysame, \emph{Diffeomorphisms of {$4$}-manifolds}, J. London Math. Soc. \textbf{39} (1964), 131--140. %\MR{0163323 (29 \#626)}
+
+\bibitem{wall:4-manifolds}
+\bysame, \emph{On simply-connected {$4$}-manifolds}, J. London Math. Soc. \textbf{39} (1964), 141--149. %\MR{0163324 (29 \#627)}
+
+\bibitem{yasui}
+K.~Yasui,
+{\em Nonexistence of twists generating exotic $4$-manifolds}, prepint
+\newblock \url{http://arXiv:1610.04033}, 2016.
+
+
+\end{thebibliography}
+
+ 
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+OLD STUFF, PROBABLY USELESS
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+OLD FIGs 1 and 2
+
+%%%%%%%%%% FIG 1 %%%%%%%%%%
+\fig{150}{FigCorkRotation}{
+\put(-103,57){$B^4$}
+\put(-120,13){$C_0$}
+\put(-30,45){$C_1$}
+\put(-90,92){$C_2$}
+\put(-177,72){$C_3$}
+\put(-30,6){$h$}
+\caption{The pinwheel of a multicork of order $4$}
+\label{corkrotation}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%% FIG 2 %%%%%%%%%%
+\fig{160}{FigCyclicCork}{
+\put(-175,25){$X$}
+\put(-45,40){$C$}
+\caption{The embedding $C = \bsum \subset X$ of a cyclic cork}
+\label{cycliccork}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+% A stable embedding $C_i\subset X$ is called {\it trivial} if $C_i$ is contained in a 4-ball $B\subset X$, and diffeomorphisms $X_{C_i,C_j} \to X$ can be chosen that are the identity off of $B$.   
+
+% More generally, any list of multicorks $\calc = (C_0,C_1,\dots),\,\calc' = (C_0',C_1',\dots),\dots$ with embeddings $C_0\subset X$, $C_0'\subset X,\, \dots$ {\it generates} the list $\call_0(\calc)\cup\call_0(\calc')\cup\cdots$ of 4-manifolds. The analogous notions apply to embedded corks by viewing them as multicorks via the map $\mu$.
+
+% A multicork which has a trivial embedding in $S^4$ will be called {\it simple},    Similarly, an embedding $C\subset X$ of a cork $(C,h)$ is {\it trivial} if it is trivial as an embedding of $\mu(C,h)$, that is if $X_{C,h}$ is diffeomorphic to $X$, or equivalently, $h$ extends to a diffeomorphism of $C$.
+
+%Note that if $\del X \ne \varnothing$, then $\del X$ and $\del X_{C_i,C_j}$ are naturally identified and will be considered equal; the same is true of the boundary after cork twists.
+
+% In fact in the arguments that follow the $C_i$'s themselves will be obtained by cork twisting $C$, in which case we can take $h_i = \id$ and write $X_{C,C_i}$ for $X_{C,(C_i,h_i)}$.  
+
+%In the proofs that follow concerning multicorks $(C, (C_1,h_1),\dots)$, it will sometimes be necessary to deal with more than one embedding of $C$ in a 4-manifold $X$.  In this case it is convenient to decorate the notation for cork replacements with the name of the embedding.  Thus the replacement $X_{C,(C_i,h_i)}$ for an embedding $e:C\hookrightarrow X$ is more precisely denoted $X_{C,(C_i,h_i)}^e$, defined by $(X-\interior(e(C)))\cup_{eh_i} C_i$. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibitem{akbulut:contractible}
+S.~Akbulut, \emph{A fake compact contractible {$4$}-manifold}, J. Differential
+  Geom. \textbf{33} (1991), no.~2, 335--356. %\KR{92b:57025}
+
+\bibitem{akbulut-ruberman:absolute}
+S.~Akbulut and D.~Ruberman, {\em Absolutely exotic contractible $4$-manifolds}.  Comm. Math. Helv., to appear.
+\newblock \url{http://arxiv.org/abs/1410.1461}, 2014.
+
+\bibitem{akbulut-yasui:knotting-corks}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, \emph{Knotting corks}, J. Topol. \textbf{2} (2009), no.~4, 823--839.
+  %\KR{2574745 (2011e:57036)}
+
+\bibitem{akbulut-yasui:stein}
+\leavevmode\vrule height 2pt depth -1.6pt width 23pt, \emph{Stein 4-manifolds and corks}, J. G\"okova. Geom. Topol. \textbf{6} (2012), 58--79.
+
+\bibitem{akmr:isotopy}
+D.~Auckly, H-J.~Kim, P.~Melvin and D.~Ruberman,
+{\em Stable isotopy in four dimensions},
+J. Lond. Math. Soc.,
+\textbf{91}, (2015), 439--463.
+
+\bibitem{akmr:equivariant}
+\bysame
+{\em Equivariant corks},
+\newblock \url{http://arXiv:1602.07650}, 2016.
+
+\bibitem{bizaca-gompf:elliptic}
+{\v{Z}}.~Bi{\v{z}}aca and R.~E. Gompf, \emph{Elliptic surfaces and some
+  simple exotic {${\bf R}^4$}'s}, J. Differential Geom. \textbf{43} (1996),
+  no.~3, 458--504. %\KR{1412675 (97j:57044)}
+  
+\bibitem{cerf}
+J.~Cerf, \emph{Sur les diff\'eomorphismes de la sph\'ere de dimension trois $(\Gamma_4 = 0)$}, Lecture Notes in Math. 53, Springer-Verlag, Berlin (1968).
+
+\bibitem{curtis-freedman-hsiang-stong}
+C.~L.~Curtis, M.~H.~Freedman, W.~C.~Hsiang, and R.~Stong,
+  \emph{A decomposition theorem for {$h$}-cobordant smooth simply-connected
+  compact {$4$}-manifolds}, Invent. Math. \textbf{123} (1996), no.~2, 343--348.
+  %\KR{1374205 (97e:57020)}
+
+\bibitem{fs:rationalblowdown}
+R.~Fintushel and R.~J. Stern, \emph{Rational blowdowns of smooth {$4$}-manifolds}, J. Differential
+  Geom. \textbf{46} (1997), no.~2, 181--235. %\KR{1484044 (98j:57047)}
+
+\bibitem{freedman:simply-connected}
+M.~H.~Freedman, \emph{The topology of four--dimensional manifolds}, J.
+  Diff.\ Geo. \textbf{17} (1982), 357--432.
+
+\bibitem{gompf:nuclei}
+R.~E. Gompf, \emph{Nuclei of elliptic surfaces}, Topology \textbf{30}
+  (1991), no.~3, 479--511. %\KR{1113691 (92f:57042)}
+
+\bibitem{GS:book}
+R.~E.~Gompf and A~Stipsicz, {\em 4-manifolds and Kirby Calculus},  
+Graduate studies in mathematics, American Mathematical Society (1999).
+
+%\bibitem{kerckhoff:nielsen}
+%S.~P. Kerckhoff, {\em The {N}ielsen realization problem}, Ann. of Math. (2),
+%  {\bf 117} (1983), 235--265.
+
+\bibitem{matveyev:h-cobordism}
+R.~Matveyev, \emph{A decomposition of smooth simply-connected
+  {$h$}-cobordant {$4$}-manifolds}, J. Differential Geom. \textbf{44} (1996),
+  no.~3, 571--582. %\KR{1431006 (98a:57033)}
+
+\bibitem{mazur:contractible}
+B.~Mazur, \emph{A note on some contractible {$4$}-manifolds}, Ann. of Math.
+  (2) \textbf{73} (1961), 221--228. %\KR{0125574 (23 \#A2873)}
+  
+\bibitem{palais}
+R.~Palais, \emph{Extending diffeomorphisms}, Proc. Amer. Math. Soc. \textbf{11} (1960), 274--277.
+
+%\bibitem{raymond-scott:nielsen}
+%F.~Raymond and L.~L. Scott, {\em Failure of {N}ielsen's theorem in higher
+%  dimensions}, Arch. Math. (Basel), {\bf 29} (1977), 643--654.
+
+%
+%\bibitem{smith:finite}
+%P.~A. Smith, {\em New results and old problems in finite transformation
+%  groups}, Bull. Amer. Math. Soc., {\bf 66} (1960), 401--415.
+
+
+\bibitem{SnapPy}
+Marc Culler, Nathan~M. Dunfield, and Jeffrey~R. Weeks, \emph{Snap{P}y, a
+  computer program for studying the topology of $3$-manifolds}, Available at
+  \url{http://snappy.computop.org} (21/09/2014).
+
+\bibitem{tange:cycliccorks}
+M.~Tange, {\em Finite order corks}.
+\newblock \url{http://arXiv:math/1601.07589v1}, 2016.
+
+\bibitem{zimmermann:classification}
+B.~Zimmermann, {\em On the classification of finite groups acting on homology
+  3-spheres}, Pacific J. Math., {\bf 217} (2004), 387--395.
+
+
+
+OLD SECTION 2
+
+\section{Containment Results}
+
+The previous section outlines how to obtain a classic finite cork from a classic finite length multicork. The results presented in this section produce a single multicork from a collection of multicorks, by encasing a collection of contractible manifolds within one larger contractible manifold-- this argument is central to all of the main theorems. 
+
+
+%\def\A{\overbar A}
+%\def\H{\overbar H}
+
+
+First, we modify a standard argument involving finger moves to deal with some fundamental group issues in advance. 
+
+\noindent{\bf Claim.} {\it Let $A_1, \dots, A_n$ be \ac-submanifolds of a compact simply-connected $4$-manifold $X$. If each $A_i$ is good, then after a suitable isotopy between the $A_i$'s, can make $A \subset X$ is good, where $A$ is the {\sl union} of all the $A_i$'s.}  
+
+  
+% For notational convenience we write $\H$ for the core of a 2-handle $H$, $\A$ for the core 2-complex of $A$ (and similarly for each $A_i$).  Since $\pi_1(X-A)$ is normally generated by the belt circles of the 2-handles, it suffices to find a {\it dual sphere to $A$ through each 2-handle $H$}, meaning an {\it immersed 2-sphere} $\Sigma$ in $X$ intersecting the core 2-complex $\A$ of $A$ transversely in a single point on the core disk $\H$ of $H$, away from the other 2-handles.  If $H\subset A_i$ then we can at least find a dual $\Sigma$ of $A_i$ through $H$, since $\pi_1(X-A_i)=1$, but $\Sigma$ may intersect a 2-handle $H_j$ in some other $A_j$.  In this case, however, we can move $\Sigma$ so that the algebraic intersection number $\Sigma\cdot \H_j = 0$.  Indeed any point in $\Sigma\cap \H_j$ can be eliminated, without changing the algebraic intersection numbers of $\Sigma$ with any other 2-handle cores, by pushing $\Sigma$ with a finger move across the 1-handle in $A_j$ homotopically cancelled by $H_j$.  At this stage $\Sigma$ intersects $\A_i$ in a single point on $\H$, and has zero algebraic intersection number with every 2-handle core $\H_j\subset A_j$ for $j\ne i$.  Thus if $\Sigma\cap\H_j\ne\varnothing$, we can pair off the points $\Sigma \cap \H_j$ and construct immersed disks in the complement of $\A_j$ for the corresponding Whitney circles; this is possible since $\pi_1(X-A_j)=1$.   These disks can be arranged to be Whitney disks, as their framings can be modified as necessary by �boundary twisting� around $\Sigma$, at the cost of introducing additional intersection points of the Whitney disks with $\Sigma$.  Pushing each $\A_k$ for $k\ne j$ across $\A_j$ by finger moves, we can also arrange for the Whitney disks to lie in the complement of $\A$.  Now pushing $\Sigma$ across these immersed Whitney disks will eliminate all intersections of $\Sigma$ with $H_j$.  Repeating this process, we remove all the intersections of $\Sigma$ with $A$ outside $H$, as desired.  This completes the proof of the claim. 
+ 
+
+% For notational convenience we write $\H$ for the core of a 2-handle $H$, $\A$ for the core 2-complex of $A$ (and similarly for each $A_i$). 
+
+
+\noindent{\it Proof of the claim.}
+Fix trivial \ac-structures for the $A_i$'s, which may be pulled apart so that their respective 1-skeleta are disjoint, and then adjusted so that any pair of 2-handles intersect in finitely many plumbings arising from transverse intersections of their cores. We write $\H$ for the core disk of a 2-handle $H$, and $\A_j$ for the core 2-complex of $A_j$. As $X$ is simply-connected, the group $\pi_1(X-A)$ is normally generated by the belt circles of the 2-handles. Hence, when $X$ is closed, to show that $A$ is good it suffices to find an immersed disk $\Sigma$ in $X-A$ bounded by the belt circle of each 2-handle $H\subset A_i$. 
+
+Now since $A_i \subset X$ is good, there is certainly such an immersed disk $\Sigma$ disjoint from $A_i$. However, $\Sigma$ may intersect a 2-handle $H_j$ in some other $A_j$. In this case, any point in $\Sigma\cap \H_j$ can be eliminated, without changing the algebraic intersection numbers of $\Sigma$ with any other 2-handle cores, by pushing $\Sigma$ with a finger move across the 1-handle in $A_j$ homotopically cancelled by $H_j$. At this stage $\Sigma$ has zero algebraic intersection number with every 2-handle core in $A$, and is disjoint from $A_i$.
+
+Thus, if $\Sigma\cap\H_j\ne\varnothing$, the points $\Sigma \cap \H_j$ can be partitioned into cancelling pairs. For each pair, there is a Whitney circle $\gamma \subset \Sigma \cup \H_j$ bounding an immersed disk $\mathcal D$ in the complement of $A_j$, since $A_j$ is good.  In fact, pushing each $\A_k$ for $k\ne j$ across $\A_j$ by finger moves, we can arrange for $\mathcal D$ to lie in the complement of $A$. A trivialization of the normal bundle of $\mathcal D$ induces a framing of $\gamma$ which can be modified to match the Whitney framing by ``boundary twisting"  $\mathcal D$ around $\Sigma$, at the cost of introducing additional intersection points between $\mathcal D$ and $\Sigma$ (see Sections 1.3-1.4 from Freedman and Quinn \cite{freedman-quinn:4-manifolds}). 
+
+At this point $\mathcal D$ is a Whitney disk, and so $\Sigma$ may be regularly homotoped to eliminate the cancelling pair of intersection points between $\Sigma$ and $H_j$, without adding any additional intersections between $\Sigma$ and $A$. Repeating this process removes all the intersections of $\Sigma$ with $A$, completing the proof of the claim when $X$ is closed. 
+
+To show that $A$ is good when $X$ has boundary, we find an immersed genus $0$ cobordism $\Sigma$ in $X-A$ from the belt circle of each 2-handle $H\subset A_i$ to a collection of curves in $\del X$. The proof proceeds analogously.  Start by producing such a cobordism $\Sigma$ in $X-A_i$, which has zero algebraic intersection number with every 2-handle core $\H_j\subset A_j$ for $j\ne i$. Then, let $\gamma \subset \Sigma \cup \H_j$ be a Whitney circle for some cancelling pair of intersection points $p,q \in \Sigma \cap \H_j$. Since $A_j$ is good, there is an immersed cobordism $\mathcal C$ from $\gamma$ to $\del X$ in the complement of $A$ (this step may require finger moves between the $A_i$'s). 
+
+To eliminate this pair of intersection points from $\Sigma \cap \H_j$, perform an analog of the Whitney trick across this cobordism by modifying $\Sigma$ in two steps, using the standard local model depicted in the figures for $\Sigma \cup \H_j$ near the intersection points. First, surger $\Sigma$ by replacing an $S^0$ neighborhood of $p \cup q$ with the boundary of a tubular neighborhood of the arc $\gamma \cap \H_j$ in the $t=0$ cross-section of the standard model (this removes the intersection points $p$ and $q$). Choosing this neighborhood sufficiently small yeilds a genus 1 cobordism $\Sigma_0$ intersecting the cobordism $\mathcal C$ in a circle $c$ consisting of the arc $\gamma \cap \Sigma$ together with an arc running along the surgured tube. Let $\mathcal C_0$ denote the closure of the component of $\mathcal C - c$ intersecting $\del X$. Since $\mathcal C_0$ has at least two boundary components, its normal bundle can be trivialized by extending the framing of $c$ induced by $\Sigma_0$. So, we can surger $c$, replacing its annular neighborhood in $\Sigma_0$ by two parallel (with respect to the trivialization) copies of $\mathcal C_0$. This yields a new genus $0$ cobordism from the belt curve of $H$ to $\del X$, as indicated by the Figure. As before, repeating this process removes all the intersections of $\Sigma$ with $A$, which completes the proof of the claim in full. 
+
+For the most part, the proof of the Lemma below follows a construction that can be found in the original treatments (cf.\ \cite{curtis-freedman-hsiang-stong,kirby:cork}) of the Involutory Cork Theorem. However, as some details have changed (for example, the contractible manifolds $A_1, \dots , A_n$ replace the 2-spheres from the original proofs), and since there are various properties of the corks gotten through this construction which we wish to highlight, we outline the proof in detail-- noting that both Rob and Mike's versions are very illuminating reads. 
+
+
+\begin{lemma}\label{encasement} 
+{\bf a)}  Any finite collection $A_1, \dots, A_n$ of contractible \ac-submanifolds of a compact simply-connected $4$-manifold $X$ can be isotoped $($independently$)$ to lie in one contractible \ac-submanifold $C\subset X$.   
+\\[2pt]
+{\bf b)} Given $A_1,\dots, A_n$ and $X$ as in \textup{\bf a)}, suppose also that $A_i \subset X$ is good for all $i$.  Then there is a \ac-submanifold $C\subset X$ as in \textup{\bf a)} that is good.
+\end{lemma}  
+
+\pf
+The contractible manifold $C$ is constructed roughly as follows.  First, move the $A_i$'s into a special position so that their union $A$ is seen as a contractible \ac-manifold, built out of 0, 1 and 2-handles, together with some additional 1-handles.  Then extend this to a  handle structure on all of $X$, where each 1-handle is cancelled homotopically by a 2-handle. The contractible \ac-manifold $C$ will be the union of all the 1-handles, and their homotopically cancelling 2-handles (this union includes $A$). Now the details.
+     
+Fix trivial \ac-structures $A_i = [L_1^i,\,L_2^i]$ for $i=1,\dots,n$.  Now push the $A_i$'s apart so that their respective 1-skeleta lie in disjoint 4-balls.  Then combine the 0-handles into a single one by boundary summing with a 4-ball in the complement of the $A_i$'s.  Finally (as in the proof of claim) adjust the 2-handles so that their only intersections are plumbings arising from transverse intersections of their cores. 
+
+Now in its present position, the union $A$ of the $A_i$'s is seen as the boundary sum 
+$$
+B \ = \ A_1\natural\cdots\natural \,A_n \ = \ [L_1,\,L'_2] \ := \ [L_1^1\sqcup\cdots\sqcup L_1^n,\, L_2^1\sqcup\cdots\sqcup L_2^n]
+$$
+modified by plumbings of the 2-handles.  Each plumbing has the effect of clasping the relevant attaching circles, where the sign of the clasp depends on the orientation of the plumbing, and then encasing the clasp in a dotted circle. This changes $L'_2$ into a framed link $L_2$, while the dotted circles about the clasps form an unlink $I_0$ disjoint from $L_1$ and homotopically unlinked from $L_2$.   Thus we obtain a trivial \ac-structure 
+$$
+A \ = \  [L_1\cup I_0, \,L_2]
+$$
+built in a canonical way from $B$.  The 0-handle and the handles given by $L_1$ and $L_2$ will be called \emph{basic handles}, while those given by $I_0$ will be called \emph{inner $1$-handles}.  This \ac-structure is illustrated in \figref{corkunion} for the case $n=2$ where $A_1$ (shown in green) is the Mazur manifold and $A_2$ (shown in blue) is the Akbulut-Matveyev ``positron" \cite{akbulut-yasui:corks-plugs}, embedded so that their 2-handles are plumbed three times geometrically, and once algebraically.  The inner 1-handles are shown in red.  
+
+%%%%%%%%%% FIG 1 %%%%%%%%%%
+\fig{80}{FigMazurAM}{
+\put(-327,-15){$A_1$}
+\put(-241,-15){$A_2$}
+\put(-130,-15){$A \ = \ A_1\cup A_2  \ \subset \ X$}
+\caption{Union of corks}
+\label{corkunion}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Next extend the \ac-structure on $A$ to a handlebody for all of $X$, with 
+% no 4-handles and 
+no additional 0-handles.  Broadening the collection of inner 1-handles to include {\it all} the 1-handles in $X-A$, we obtain a corresponding dotted unlink $I_1$ containing $I_0$ and unlinked from $L_1$.  Since $\pi_1(X)=1$, the $2\text{-handles}$ in $X-A$ can be slid over one another and over the basic 2-handles (possibly first introducing cancelling 2/3-handle pairs in $X-A$ to avoid Andrews-Curtis issues) so that all the inner $1\text{-handles}$ are homotopically cancelled by an equal number of 2-handles in $X-A$, which we call the {\it inner $2$-handles}.  In fact, since the basic 2-handles homotopically cancel the basic 1-handles, we can assume that the conglomerate of all the basic and inner 2-handles homotopically cancel all the 1-handles in $X$.  Now let $I_2$ be the framed attaching link for the inner 2-handles.  Then  $[L_1\cup I_1,\,L_2\cup I_2]$ is a trivial \ac-handlebody specifying the desired contractible \ac-submanifold
+$$
+C \ = \ [L_1\cup I_1,\,L_2\cup I_2].
+$$ 
+Indeed $C$ consists of $A$, containing all the $A_i$'s as required, together with all the remaining inner 1-handles and all the inner 2-handles in $X$.   
+
+{\bf b)} Assume that $X$ is closed, and that $\pi_1(X-A_i) = 1$ for each $i$, or a fortiori by the claim above that $\pi_1(X-A) = 1$.
+% a fortiori, because the natural map $\pi_1(X-A)\to\pi_1(X-A_i)$ is onto, since $A$ % is effectively a 2-complex and we're in a 4-manifold
+Let $C$ be the contractible \ac-submanifold of $X$ constructed as above using all the {\it basic} and {\it inner} handles in $X$.  The handles in $X-C$, all of index $\geq 2$, will be called {\it outer handles}; all handles will maintain their designations, even after further handleslides.  
+
+Note that $H_1(X-C)$ is trivial by a Mayer-Vietoris argument, since $\del C$ is a homology sphere. However, to satisfy the stronger condition $\pi_1(X-C)=1$, \emph{extra} cancelling 1/2-handle pairs may have to be added to $C$, so that the attaching words of the dual outer 2-handles can be modified to make the presentation of the fundamental group of the complement clearly trivial. The union of all the basic, inner and extra handles will be the desired contractible \ac-manifold $C$.  To execute this procedure in more detail, we first set some notation.
+
+The {\it $k$-skeleton} $X^k$ of the handlebody $X$ is the union of all the handles of index at most $k$.  Collars will never be added between the handles, except for a final collar after all the handles are attached.  Turning $X$ upside down produces the {\it dual handlebody} $X^*$, with {\it dual $k$-skeleton} $X^{*k}$ equal to the union of the dual handles of index at most $k$. 
+
+The 2-skeleton $X^2$ gives a presentation $(x_1,\dots,x_n\,|\,r_1,\dots,r_m)$ of the trivial group $\pi_1(X)$ in the usual way, where the $x_i$'s correspond to the 1-handles of $X$, and the $r_i$'s to the attaching circles of the 2-handles.  By the construction of $C$, this presentation is trivial (or can be made so by sliding the outside 2-handles suitably over the basic and inside ones). 
+
+The dual 2-skeleton $X^{*2}$ also gives a presentation $(y_1,\dots,y_t\,|\,s_1,\dots,s_m)$ of the trivial group $\pi_1(X)$,
+where the $y_i$'s correspond to the dual 1-handles (upside down 3-handles), and the $s_i$'s to the attaching circles of the dual 2-handles.  In particular, suppose that $s_1,...,s_k$ are the words corresponding to the attaching circles of the dual outer 2-handles. Then, as $H_1(X-C)=0$, the free product $F_t=(y_1,\dots,y_t)$ is normally generated by $s_1, \dots, s_k$. After sliding the outer 2-handles over each other, we may assume for $i=1,...,t$ that $s_i= y_i c_i$, where $c_i \in F_t$ is a product of conjugates of commutators. In order to obtain $\pi_1(X-C)=1$, we will arrange for each $s_i$ to represent the word $y_i$ exactly. 
+
+First, introduce $t$ cancelling 1/2-handle pairs to $C$ which we call the {\it extra handles}, the $i^{\text th}$ of which has attaching word $e_i \in \pi_1(X^{1})$, and attaching word $e_i^* \in \pi_1(\del X) * F(y_1,\dots,y_t)$ of its dual 2-handle. Consider the intersection 
+$
+M = \del X^{1} \cap \del X^{*1},
+$
+which is the complement in $\del X^{1}$ of the attaching regions of all the 2-handles-- or equivalently, the complement in $\del X^{*(1)}$ of the attaching regions of the dual 2-handles. By Kirby (Proposition in the proof of Claim A), the map induced by inclusion $\pi_1(M) \to \pi_1(X^{1}) \oplus \pi_1(X^{*1})$ is onto. The operation of sliding the $i^{\text th}$ 2-handle $H_i$ in $X$ over the $j^{\text th}$ one $H_j$ along a curve $(\gamma, \lambda)$ will change the attaching maps so that $h_i \mapsto h_i \gamma h_j \gamma^{-1}$ and $h_j^* \mapsto h_j^* \lambda^{-1} h_i^* \lambda$. Changing the basepoints will change these words by conjugation, so will not affect the associated group presentation. 
+
+Since $\pi_1(X-A)=1$, both the inner and outer 2-handles (leaving the basic 2-handles fixed) can be slid over the extra 2-handles along paths of the form...Taking $C$ as the union of the basic, inner, and extra 1 and 2-handles, the fundamental group of the complement is a quotient of $\pi_1(\del X)$. Furthermore, both $C$ and $X-C$ are AC.
+
+\begin{lemma} \label{corkstocorks} 
+Let $X$ be a compact, simply-connected $4$-manifold with homology sphere boundary, homeomorphic to $X_1, \dots, X_n$. Any finite collection of classic corks $(A_1, h_1), \dots, (A_m, h_n)$ with $A_i \subset X$ and diffeomorphisms $F_i\colon X_{A_i,h_i} \to X_i$ can be isotoped (independently) to lie in an order $n+1$ classic cork $(C,h)$ with $C \subset X$ and diffeomorphisms $G_i\colon X_{C,h^i} \to X_i$ which agree with $F_i$ on $\del X_{C,h^i}= \del X_{A_i,h_i}$. Furthermore, if $A_i \subset X$ is good for all $i$, then $C$ may be chosen so that $C \subset X$ is good.
+\end{lemma}  
+
+\proof By Lemma \ref{encasement}, the corks $A_1, \dots, A_n$ can be isotoped to be contained in an AC-manifold $C_0 \subset X$, which is good if each $A_i$ is good. As each $A_i$ is classic, the contractible manifold $C_i= (C_0)_{A_i, h_i}$ is obtained from $C_0$ by a zero-dot swap, with natural map $h_i\colon \del C_i \to \del C_0$ identifying the boundaries. Hence, the multicork $(C_0; (C_1, h_1), \dots, (C_n, h_n))$ is classic.
+
+Furthermore, for each $i$, the identity map on $\del X_{C_0, C_i}= \del X_{A_i,h_i}$ extends to a diffeomorphism $H_i\colon X_{C_0, C_i} \to X_{A_i,h_i}$. Then $F_i \circ H_i\colon X_{C_0, C_i} \to X_i$ is a diffeomorphism agreeing with $F_i$ on $\del X$. As classic multicorks are simple, applying Lemma \ref{mctoc} to the multicork $(C_0; (C_1, h_1), \dots, (C_n, h_n))$ produces the desired order $n+1$ cork $(C,h)$. \qed 
+
